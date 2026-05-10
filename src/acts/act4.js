@@ -4,14 +4,14 @@
  * student writes a deductive argument; Holmes-AI evaluates validity + soundness.
  */
 
-import { Casebook } from '../core/state.js?v=3';
-import { judge } from '../core/ai-client.js?v=3';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=3';
-import { announce, navigate } from '../core/nav.js?v=3';
+import { Casebook } from '../core/state.js?v=4';
+import { judge } from '../core/ai-client.js?v=4';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=4';
+import { announce, navigate } from '../core/nav.js?v=4';
 import {
   ACT4_INTRO, HOTSPOTS, SUSPECTS,
   ACT4_WRITE_PROMPT, ACT4_BACK_TO_HOTSPOTS_REMINDER, ACT4_FAIL_HINT
-} from '../../data/act4-investigation.js?v=3';
+} from '../../data/act4-investigation.js?v=4';
 
 let _state = null;
 
@@ -338,9 +338,10 @@ async function onSubmit(root, suspect) {
   root.querySelector('#submit-btn').disabled = true;
   root.querySelector('#thinking').style.display = '';
 
+  const act1Evidence = (Casebook.get().acts[1]?.evidenceMarked || []);
   const result = await judge({
     stage: 'holmes-final',
-    payload: { argument: text, suspect: suspect.name }
+    payload: { argument: text, suspect: suspect.name, evidence: act1Evidence }
   });
 
   _state.submitting = false;

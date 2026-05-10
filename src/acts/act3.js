@@ -11,15 +11,15 @@
  * One AI call per student (the Sapolsky rebut).
  */
 
-import { Casebook } from '../core/state.js?v=3';
-import { judge } from '../core/ai-client.js?v=3';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=3';
-import { announce } from '../core/nav.js?v=3';
+import { Casebook } from '../core/state.js?v=4';
+import { judge } from '../core/ai-client.js?v=4';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=4';
+import { announce } from '../core/nav.js?v=4';
 import {
   ACT3_INTRO, SAPOLSKY_LETTER, STANDARD_FORM_OPTIONS,
   LESTRADE_OBJECTION, PREMISE_OPTIONS,
   STUDENT_WRITES_PROMPT, ACT3_OUTRO, SAPOLSKY_PROPOSITION
-} from '../../data/act3-sapolsky.js?v=3';
+} from '../../data/act3-sapolsky.js?v=4';
 
 let _state = null;
 
@@ -301,9 +301,10 @@ async function onWriteSubmit(root) {
   root.querySelector('#submit-btn').disabled = true;
   root.querySelector('#thinking').style.display = '';
 
+  const act1Evidence = (Casebook.get().acts[1]?.evidenceMarked || []);
   const result = await judge({
     stage: 'sapolsky-rebut',
-    payload: { argument: text, proposition: SAPOLSKY_PROPOSITION }
+    payload: { argument: text, proposition: SAPOLSKY_PROPOSITION, evidence: act1Evidence }
   });
 
   _state.submitting = false;

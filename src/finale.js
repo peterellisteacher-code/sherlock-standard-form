@@ -3,9 +3,9 @@
  * Replays the case, summarises the philosophical work, prints a casebook digest.
  */
 
-import { Casebook } from './core/state.js?v=3';
-import { html, raw, escape, topbar } from './core/components.js?v=3';
-import { announce } from './core/nav.js?v=3';
+import { Casebook } from './core/state.js?v=4';
+import { html, raw, escape, topbar } from './core/components.js?v=4';
+import { announce } from './core/nav.js?v=4';
 
 export function render(root, _params) {
   const s = Casebook.get();

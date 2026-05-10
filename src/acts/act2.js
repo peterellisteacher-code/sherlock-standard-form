@@ -7,11 +7,11 @@
  * structured JSON.
  */
 
-import { Casebook } from '../core/state.js?v=3';
-import { judge } from '../core/ai-client.js?v=3';
-import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=3';
-import { announce } from '../core/nav.js?v=3';
-import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=3';
+import { Casebook } from '../core/state.js?v=4';
+import { judge } from '../core/ai-client.js?v=4';
+import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=4';
+import { announce } from '../core/nav.js?v=4';
+import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=4';
 
 let _state = null;
 
@@ -230,9 +230,11 @@ async function onSubmit(root, level) {
     text: t.role === 'user' ? t.text : (t.judgement?.in_character || '')
   }));
 
+  // Watson's Act-I-collected evidence travels with him to Mycroft
+  const act1Evidence = (Casebook.get().acts[1]?.evidenceMarked || []);
   const result = await judge({
     stage: level.stage,
-    payload: { argument: text },
+    payload: { argument: text, evidence: act1Evidence },
     history
   });
 

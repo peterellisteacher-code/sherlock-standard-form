@@ -3,15 +3,15 @@
  * Detective name capture, narrative framing, four-act picker.
  */
 
-import { Casebook } from './core/state.js?v=3';
-import { html, raw, escape, modal } from './core/components.js?v=3';
+import { Casebook } from './core/state.js?v=4';
+import { html, raw, escape, modal } from './core/components.js?v=4';
 
 const ACTS = [
   {
     n: 1,
     name: 'The Adventure of the Singular Visitor',
-    desc: 'A late call. A woman in mourning. A pocket-watch that contradicts her brother\'s confession. Examine the case-file by lamplight at 221B.',
-    skills: 'Observation · Inference · Atmosphere'
+    desc: 'Walk into 221B Baker Street. A grieving sister has left a case-file on the desk. Examine six pieces of evidence; mark what matters; what you keep goes with you into the next acts.',
+    skills: 'Investigation · Evidence · Atmosphere'
   },
   {
     n: 2,

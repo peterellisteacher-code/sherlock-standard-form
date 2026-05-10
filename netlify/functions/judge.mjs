@@ -303,17 +303,26 @@ function buildSystem(stage) {
   }];
 }
 
+function evidenceBlock(payload) {
+  // Watson's Act-I-collected evidence travels with him into every subsequent act.
+  // We surface it to the model as a labelled block so it can quote specific items.
+  const items = Array.isArray(payload.evidence) ? payload.evidence : [];
+  if (!items.length) return '';
+  const lines = items.map(it => `  - ${it.title}: ${it.relevant}`).join('\n');
+  return `\n\nEVIDENCE WATSON BROUGHT FROM 221B (Act I — the student chose to mark these as relevant):\n${lines}\n\nWhen relevant, you MAY refer to specific items by their title. If the student's argument fails to draw on any of this evidence, that is a fair criticism to make. If the student cites an item they did NOT mark in Act I, the evidence block above is the ground truth.`;
+}
+
 function buildUserMessage(stage, payload) {
-  // Each stage has a different "user message" shape; we synthesise it here.
+  const evBlock = evidenceBlock(payload);
   if (stage.startsWith('mycroft-')) {
-    return `STUDENT'S ARGUMENT (in standard form):\n\n${payload.argument || '(empty)'}\n\nEvaluate per the rubric for ${stage}. Reply with JSON only.`;
+    return `STUDENT'S ARGUMENT (in standard form):\n\n${payload.argument || '(empty)'}${evBlock}\n\nEvaluate per the rubric for ${stage}. Reply with JSON only.`;
   }
   if (stage === 'sapolsky-rebut') {
-    return `STUDENT'S ARGUMENT (in standard form):\n\n${payload.argument || '(empty)'}\n\nThe student is arguing FOR or AGAINST: "${payload.proposition || '(missing proposition)'}"\n\nChallenge ONE premise. Reply with JSON only.`;
+    return `STUDENT'S ARGUMENT (in standard form):\n\n${payload.argument || '(empty)'}\n\nThe student is arguing FOR or AGAINST: "${payload.proposition || '(missing proposition)'}"${evBlock}\n\nChallenge ONE premise. Reply with JSON only.`;
   }
   if (stage === 'holmes-final') {
     const accusedSuspect = payload.suspect || '(no suspect named)';
-    return `STUDENT'S DEDUCTIVE ARGUMENT (in standard form):\n\n${payload.argument || '(empty)'}\n\nNamed suspect: ${accusedSuspect}\n\nEvaluate validity and soundness against the evidence. Reply with JSON only.`;
+    return `STUDENT'S DEDUCTIVE ARGUMENT (in standard form):\n\n${payload.argument || '(empty)'}\n\nNamed suspect: ${accusedSuspect}${evBlock}\n\nEvaluate validity and soundness against the evidence. Reply with JSON only.`;
   }
   return JSON.stringify(payload);
 }
