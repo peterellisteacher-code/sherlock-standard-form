@@ -11,15 +11,15 @@
  * One AI call per student (the Sapolsky rebut).
  */
 
-import { Casebook } from '../core/state.js?v=4';
-import { judge } from '../core/ai-client.js?v=4';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=4';
-import { announce } from '../core/nav.js?v=4';
+import { Casebook } from '../core/state.js?v=5';
+import { judge } from '../core/ai-client.js?v=5';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=5';
+import { announce } from '../core/nav.js?v=5';
 import {
   ACT3_INTRO, SAPOLSKY_LETTER, STANDARD_FORM_OPTIONS,
   LESTRADE_OBJECTION, PREMISE_OPTIONS,
   STUDENT_WRITES_PROMPT, ACT3_OUTRO, SAPOLSKY_PROPOSITION
-} from '../../data/act3-sapolsky.js?v=4';
+} from '../../data/act3-sapolsky.js?v=5';
 
 let _state = null;
 

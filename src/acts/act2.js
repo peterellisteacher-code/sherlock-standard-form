@@ -7,11 +7,11 @@
  * structured JSON.
  */
 
-import { Casebook } from '../core/state.js?v=4';
-import { judge } from '../core/ai-client.js?v=4';
-import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=4';
-import { announce } from '../core/nav.js?v=4';
-import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=4';
+import { Casebook } from '../core/state.js?v=5';
+import { judge } from '../core/ai-client.js?v=5';
+import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=5';
+import { announce } from '../core/nav.js?v=5';
+import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=5';
 
 let _state = null;
 

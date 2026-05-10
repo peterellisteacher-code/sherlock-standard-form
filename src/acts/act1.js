@@ -10,9 +10,9 @@
  *   3. outro — closing narrative; the marked evidence is in the Casebook for Acts II/III/IV
  */
 
-import { Casebook } from '../core/state.js?v=4';
-import { html, raw, escape, toast } from '../core/components.js?v=4';
-import { announce, navigate } from '../core/nav.js?v=4';
+import { Casebook } from '../core/state.js?v=5';
+import { html, raw, escape, toast } from '../core/components.js?v=5';
+import { announce, navigate } from '../core/nav.js?v=5';
 
 /* ===== Evidence definitions ===== */
 
@@ -187,10 +187,10 @@ function drawParlour(root) {
     </div>
 
     <div id="parlour-stage" style="position: relative; width: 100%; padding: var(--s-3);">
-      <div style="display: grid; grid-template-columns: 1fr 360px; gap: var(--s-3); align-items: start; max-width: 1440px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: 1fr 400px; gap: var(--s-3); align-items: start; max-width: 1760px; margin: 0 auto;">
 
         <div style="position: relative;">
-          <div id="parlour-phaser" style="width: 100%; max-width: 960px; aspect-ratio: 384 / 224; background: #0B0D14; border: 1px solid var(--brass); border-radius: var(--radius-md); overflow: hidden; image-rendering: pixelated;"></div>
+          <div id="parlour-phaser" style="width: 100%; max-width: 1280px; aspect-ratio: 384 / 224; background: #0B0D14; border: 1px solid var(--brass); border-radius: var(--radius-md); overflow: hidden; image-rendering: pixelated;"></div>
 
           <div id="speech-overlay" style="position: relative; margin-top: var(--s-2); background: rgba(20, 23, 31, 0.95); border: 1px solid var(--brass); border-radius: var(--radius-md); padding: var(--s-3); display: none; gap: var(--s-3); align-items: flex-start; box-shadow: var(--shadow-card);">
             <img id="speech-portrait" src="/assets/pixel/whitcombe-portrait.png" alt="Mrs Eleanor Whitcombe" style="width: 80px; height: 107px; image-rendering: pixelated; border: 1px solid var(--brass); border-radius: var(--radius-sm); flex-shrink: 0;" />
@@ -205,6 +205,27 @@ function drawParlour(root) {
         </div>
 
         <aside class="stack" id="casebook-side">
+          <!-- Keyboard-accessible evidence list (parallel to the Phaser sprite hotspots).
+               Real <button>s so Tab reaches every evidence item without needing the mouse. -->
+          <div class="panel">
+            <h4 style="font-style: italic; color: var(--brass-soft); margin-bottom: var(--s-2);">Evidence in the parlour</h4>
+            <p style="color: var(--chalk-mute); font-size: 13px; margin-bottom: var(--s-2); font-style: italic;">Click any glowing item in the scene, OR pick from this list. The list is identical.</p>
+            <ul id="evidence-keyboard-list" role="list" style="list-style: none; padding: 0; margin: 0;">
+              ${EVIDENCE.map(e => `
+                <li style="margin-bottom: 6px;">
+                  <button class="btn btn-secondary evidence-row-btn" data-evidence="${e.id}" style="width: 100%; text-align: left; justify-content: flex-start; padding: 8px 12px; min-height: 0; font-size: 14px; gap: 8px;">
+                    <img src="${e.sprite}" alt="" aria-hidden="true" style="width: 24px; height: 24px; image-rendering: pixelated; flex-shrink: 0;" />
+                    <span style="flex: 1;">${escape(e.title)}</span>
+                    <span class="evidence-status" data-status-for="${e.id}" style="font-size: 11px; color: var(--chalk-mute); font-family: var(--font-evidence); letter-spacing: 0.08em;">unexamined</span>
+                  </button>
+                </li>
+              `).join('')}
+            </ul>
+            <button class="btn btn-ghost" id="talk-whitcombe-btn" style="width: 100%; margin-top: var(--s-2); padding: 8px 12px; min-height: 0; font-size: 13px;">
+              💬 Speak with Mrs Whitcombe
+            </button>
+          </div>
+
           <div class="panel">
             <h4 style="font-style: italic; color: var(--brass-soft); margin-bottom: var(--s-2);">Casebook — marked for Holmes</h4>
             <div id="casebook-relevant" style="font-size: 14px;">
@@ -240,13 +261,26 @@ function drawParlour(root) {
   audioEl.dataset.act1 = 'true';
   audioEl.preload = 'auto';
   document.body.appendChild(audioEl);
-  let muted = false;
+  // Shared mute flag — used by both the ambient music AND the Web Audio synth SFX
+  // (sfxClick/sfxChime check window._act1Muted before producing tone).
+  window._act1Muted = false;
   root.querySelector('#mute-btn').addEventListener('click', () => {
-    muted = !muted;
-    audioEl.muted = muted;
-    root.querySelector('#mute-btn').textContent = muted ? '🔇 Audio' : '🔊 Audio';
+    window._act1Muted = !window._act1Muted;
+    audioEl.muted = window._act1Muted;
+    root.querySelector('#mute-btn').textContent = window._act1Muted ? '🔇 Audio' : '🔊 Audio';
   });
   root.querySelector('#submit-evidence').addEventListener('click', () => closeAct1(root));
+
+  // Keyboard-accessible evidence list — every row dispatches the same examine event the Phaser sprites do
+  root.querySelectorAll('.evidence-row-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.evidence;
+      window.dispatchEvent(new CustomEvent('act1:examine', { detail: { id } }));
+    });
+  });
+  root.querySelector('#talk-whitcombe-btn').addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('act1:talk-whitcombe'));
+  });
 
   // Set up event listeners (idempotent)
   window.removeEventListener('act1:examine', onExamineEvent);
@@ -268,6 +302,12 @@ function bootPhaserParlour(audioEl) {
     return;
   }
   const w = 384, h = 224;
+
+  // prefers-reduced-motion gates ALL looped/decorative tweens. Static feedback
+  // (tint on hover, etc.) still happens — but the parlour does not pulse,
+  // scale-on-hover-tween, or bob. Required by accessible-web-composition Tier 3.
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   _phaserGame = new Phaser.Game({
     type: Phaser.AUTO,
     width: w, height: h,
@@ -289,7 +329,9 @@ function bootPhaserParlour(audioEl) {
         portrait.setOrigin(0.5, 1);
         portrait.setScale(0.38);
         portrait.setInteractive({ useHandCursor: true });
-        this.tweens.add({ targets: portrait, y: 130, duration: 1400, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+        if (!reducedMotion) {
+          this.tweens.add({ targets: portrait, y: 130, duration: 1400, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+        }
         portrait.on('pointerover', () => portrait.setTint(0xfff3d0));
         portrait.on('pointerout',  () => portrait.clearTint());
         portrait.on('pointerdown', () => window.dispatchEvent(new CustomEvent('act1:talk-whitcombe')));
@@ -304,9 +346,11 @@ function bootPhaserParlour(audioEl) {
           const x = ev.x * w;
           const y = ev.y * h;
 
-          // Pulsing ring underneath
-          const ring = this.add.circle(x, y, 18, 0xB89968, 0.16);
-          this.tweens.add({ targets: ring, alpha: 0.40, scale: 1.15, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+          // Pulsing ring underneath — STATIC if reduced-motion
+          const ring = this.add.circle(x, y, 18, 0xB89968, reducedMotion ? 0.32 : 0.16);
+          if (!reducedMotion) {
+            this.tweens.add({ targets: ring, alpha: 0.40, scale: 1.15, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+          }
 
           const sprite = this.add.image(x, y, 'item-' + ev.id);
           sprite.setOrigin(0.5, 0.5);
@@ -317,11 +361,19 @@ function bootPhaserParlour(audioEl) {
           sprite._evId = ev.id;
 
           sprite.on('pointerover', () => {
-            this.tweens.add({ targets: sprite, scale: 0.27, duration: 120 });
+            if (reducedMotion) {
+              sprite.setScale(0.27);
+            } else {
+              this.tweens.add({ targets: sprite, scale: 0.27, duration: 120 });
+            }
             sprite.setTint(0xfff8c8);
           });
           sprite.on('pointerout', () => {
-            this.tweens.add({ targets: sprite, scale: 0.22, duration: 120 });
+            if (reducedMotion) {
+              sprite.setScale(0.22);
+            } else {
+              this.tweens.add({ targets: sprite, scale: 0.22, duration: 120 });
+            }
             sprite.clearTint();
           });
           sprite.on('pointerdown', () => window.dispatchEvent(new CustomEvent('act1:examine', { detail: { id: ev.id } })));
@@ -334,6 +386,7 @@ function bootPhaserParlour(audioEl) {
 
         // Try to play audio on first interaction (browser autoplay policy)
         this.input.once('pointerdown', () => {
+          if (window._act1Muted) return;
           try { audioEl.play().catch(() => {}); } catch {}
         });
       }
@@ -392,16 +445,20 @@ function hideSpeech() {
 
 function examineItem(ev) {
   const alreadyMarked = _state.evidence[ev.id].marked;
+  // Remember who opened the modal so we can restore focus on close (a11y).
+  const opener = document.activeElement;
+
   const backdrop = document.createElement('div');
   backdrop.className = 'modal-backdrop';
   backdrop.setAttribute('role', 'dialog');
   backdrop.setAttribute('aria-modal', 'true');
+  backdrop.setAttribute('aria-labelledby', 'examine-heading');
   backdrop.innerHTML = `
     <div class="modal stack" style="max-width: 720px;">
       <div class="row" style="gap: var(--s-3); align-items: flex-start;">
         <img src="${ev.sprite}" alt="${escape(ev.title)}" style="width: 96px; height: 96px; image-rendering: pixelated; border: 1px solid var(--brass); border-radius: var(--radius-sm); flex-shrink: 0;" />
         <div style="flex: 1;">
-          <h2 style="font-style: italic; margin-bottom: var(--s-2);">${escape(ev.title)}</h2>
+          <h2 id="examine-heading" style="font-style: italic; margin-bottom: var(--s-2);">${escape(ev.title)}</h2>
           <p style="line-height: 1.6;">${ev.examine}</p>
         </div>
       </div>
@@ -415,7 +472,7 @@ function examineItem(ev) {
       <div class="row row-end" style="gap: var(--s-2); flex-wrap: wrap;">
         <button class="btn btn-ghost" id="examine-close">Set down</button>
         <button class="btn btn-secondary" id="examine-discard">${alreadyMarked === 'discarded' ? 'Already set aside' : 'Set aside'}</button>
-        <button class="btn" id="examine-mark">${alreadyMarked === 'relevant' ? 'Already marked ✓' : 'Mark for Holmes'}</button>
+        <button class="btn" id="examine-mark" autofocus>${alreadyMarked === 'relevant' ? 'Already marked ✓' : 'Mark for Holmes'}</button>
       </div>
     </div>
   `;
@@ -423,24 +480,55 @@ function examineItem(ev) {
 
   _state.evidence[ev.id].examined = true;
   updateCounter();
+  refreshCasebook(document.getElementById('app'));
 
-  backdrop.querySelector('#examine-close').addEventListener('click', () => backdrop.remove());
-  backdrop.querySelector('#examine-discard').addEventListener('click', () => {
-    if (_state.evidence[ev.id].marked === 'discarded') return;
-    _state.evidence[ev.id].marked = 'discarded';
+  // Focus trap: Tab cycles within the modal until close.
+  const focusables = backdrop.querySelectorAll('button:not([disabled])');
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  const trap = (e) => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+  backdrop.addEventListener('keydown', trap);
+
+  // Move focus into the modal — autofocus may not always fire after innerHTML assignment
+  setTimeout(() => backdrop.querySelector('#examine-mark')?.focus(), 30);
+
+  const closeModal = () => {
+    backdrop.removeEventListener('keydown', trap);
+    document.removeEventListener('keydown', escHandler);
     backdrop.remove();
+    // Restore focus to the element that opened the modal (sprite click won't have a focusable target,
+    // but DOM-button-triggered openings will). Fall back to the corresponding keyboard-list row.
+    if (opener && document.body.contains(opener) && typeof opener.focus === 'function') {
+      opener.focus();
+    } else {
+      const row = document.querySelector(`.evidence-row-btn[data-evidence="${ev.id}"]`);
+      row?.focus();
+    }
+  };
+
+  backdrop.querySelector('#examine-close').addEventListener('click', closeModal);
+  backdrop.querySelector('#examine-discard').addEventListener('click', () => {
+    if (_state.evidence[ev.id].marked === 'discarded') { closeModal(); return; }
+    _state.evidence[ev.id].marked = 'discarded';
+    closeModal();
     refreshCasebook(document.getElementById('app'));
     toast(`${ev.title} — set aside`, 'warning');
     sfxClick(120, 0.06);
+    window.dispatchEvent(new CustomEvent('act1:clue-elicited', { detail: { id: ev.id, action: 'discarded' } }));
   });
   backdrop.querySelector('#examine-mark').addEventListener('click', () => {
-    if (_state.evidence[ev.id].marked === 'relevant') return;
+    if (_state.evidence[ev.id].marked === 'relevant') { closeModal(); return; }
     _state.evidence[ev.id].marked = 'relevant';
-    backdrop.remove();
+    closeModal();
     refreshCasebook(document.getElementById('app'));
     toast(`${ev.title} — marked for Holmes`, 'evidence');
     sfxChime();
     Casebook.deposit({ act: 1, stamp: ev.title, quote: ev.relevant });
+    window.dispatchEvent(new CustomEvent('act1:relevance-marked', { detail: { id: ev.id } }));
     if (_phaserGame) {
       const scene = _phaserGame.scene.scenes[0];
       const sprite = scene && scene.children.list.find(c => c._evId === ev.id);
@@ -451,13 +539,18 @@ function examineItem(ev) {
     }
   });
 
+  // Also close on backdrop click (outside the modal box)
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeModal();
+  });
+
   const escHandler = (e) => {
-    if (e.key === 'Escape') {
-      backdrop.remove();
-      document.removeEventListener('keydown', escHandler);
-    }
+    if (e.key === 'Escape') closeModal();
   };
   document.addEventListener('keydown', escHandler);
+
+  // Playbook feedback event for analytics / future extension
+  window.dispatchEvent(new CustomEvent('act1:evidence-found', { detail: { id: ev.id } }));
 }
 
 /* --- Casebook side panel update --------------------------------- */
@@ -496,6 +589,19 @@ function refreshCasebook(root) {
       : `Submit ${relevant.length} pieces to Holmes →`;
   }
 
+  // Update the keyboard-accessible evidence list's status spans
+  for (const ev of EVIDENCE) {
+    const state = _state.evidence[ev.id];
+    const span = root.querySelector(`.evidence-status[data-status-for="${ev.id}"]`);
+    if (!span) continue;
+    let label = 'unexamined', color = 'var(--chalk-mute)';
+    if (state.marked === 'relevant') { label = '✓ marked'; color = 'var(--evidence-soft)'; }
+    else if (state.marked === 'discarded') { label = 'set aside'; color = '#E89E5C'; }
+    else if (state.examined) { label = 'examined'; color = 'var(--brass-soft)'; }
+    span.textContent = label;
+    span.style.color = color;
+  }
+
   updateCounter();
 }
 
@@ -516,6 +622,7 @@ function audioCtx() {
 }
 
 function sfxClick(freq = 800, duration = 0.05) {
+  if (window._act1Muted) return;
   const ctx = audioCtx();
   if (!ctx) return;
   const osc = ctx.createOscillator();
@@ -530,11 +637,13 @@ function sfxClick(freq = 800, duration = 0.05) {
 }
 
 function sfxChime() {
+  if (window._act1Muted) return;
   const ctx = audioCtx();
   if (!ctx) return;
   const notes = [392, 494, 587];
   notes.forEach((f, i) => {
     setTimeout(() => {
+      if (window._act1Muted) return;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'triangle';

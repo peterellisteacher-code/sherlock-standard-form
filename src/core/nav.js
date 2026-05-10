@@ -11,7 +11,7 @@
  *   #/finale             -> Final reveal (after all four acts complete)
  */
 
-import { Casebook } from './state.js?v=4';
+import { Casebook } from './state.js?v=5';
 
 const _routes = new Map();
 let _currentScene = null;
@@ -111,7 +111,7 @@ export function start() {
 
 /** Live region announcer (a11y). */
 export function announce(message, polite = true) {
-  const id = polite ? 'live-polite' : 'live-assertive';
+  const id = polite ? 'hud-polite' : 'hud-assertive';
   const el = document.getElementById(id);
   if (!el) return;
   // Clear then set so AT picks up the change even on identical text.

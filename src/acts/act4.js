@@ -4,14 +4,14 @@
  * student writes a deductive argument; Holmes-AI evaluates validity + soundness.
  */
 
-import { Casebook } from '../core/state.js?v=4';
-import { judge } from '../core/ai-client.js?v=4';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=4';
-import { announce, navigate } from '../core/nav.js?v=4';
+import { Casebook } from '../core/state.js?v=5';
+import { judge } from '../core/ai-client.js?v=5';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=5';
+import { announce, navigate } from '../core/nav.js?v=5';
 import {
   ACT4_INTRO, HOTSPOTS, SUSPECTS,
   ACT4_WRITE_PROMPT, ACT4_BACK_TO_HOTSPOTS_REMINDER, ACT4_FAIL_HINT
-} from '../../data/act4-investigation.js?v=4';
+} from '../../data/act4-investigation.js?v=5';
 
 let _state = null;
 

@@ -97,7 +97,7 @@ export function toast(message, kind = 'default') {
   el.textContent = message;
   document.body.appendChild(el);
   // Update screen-reader region
-  const live = document.getElementById(kind === 'warning' ? 'live-assertive' : 'live-polite');
+  const live = document.getElementById(kind === 'warning' ? 'hud-assertive' : 'hud-polite');
   if (live) {
     live.textContent = '';
     setTimeout(() => { live.textContent = message; }, 60);
