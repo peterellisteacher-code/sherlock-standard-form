@@ -1,0 +1,17 @@
+{
+  "name": "sherlock-standard-form",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Baker Street File: SACE Stage 1 Philosophy detective game teaching standard form",
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy": "netlify deploy --prod"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
+    "@netlify/functions": "^2.8.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
