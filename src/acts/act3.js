@@ -11,15 +11,15 @@
  * One AI call per student (the Sapolsky rebut).
  */
 
-import { Casebook } from '../core/state.js';
-import { judge } from '../core/ai-client.js';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js';
-import { announce } from '../core/nav.js';
+import { Casebook } from '../core/state.js?v=3';
+import { judge } from '../core/ai-client.js?v=3';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=3';
+import { announce } from '../core/nav.js?v=3';
 import {
   ACT3_INTRO, SAPOLSKY_LETTER, STANDARD_FORM_OPTIONS,
   LESTRADE_OBJECTION, PREMISE_OPTIONS,
   STUDENT_WRITES_PROMPT, ACT3_OUTRO, SAPOLSKY_PROPOSITION
-} from '../../data/act3-sapolsky.js';
+} from '../../data/act3-sapolsky.js?v=3';
 
 let _state = null;
 
@@ -74,7 +74,7 @@ function drawIntro(root) {
       </div>
 
       <div class="row" style="justify-content: center;">
-        <button class="btn btn-large" id="advance">Read Sapolsky&apos;s letter →</button>
+        <button class="btn btn-large" id="advance">Read Sapolsky\u0027s letter →</button>
       </div>
     </div>
   `;
@@ -89,20 +89,20 @@ function drawIntro(root) {
 
 function drawLetter(root) {
   root.innerHTML = html`
-    ${raw(topbar({ act: 3, name: 'The Free Will Inquiry', progress: 'Sapolsky&apos;s letter' }))}
+    ${raw(topbar({ act: 3, name: 'The Free Will Inquiry', progress: 'Sapolsky\u0027s letter' }))}
 
     <div class="stage stack-wide">
       <div class="grid-2" style="grid-template-columns: 3fr 4fr; gap: var(--s-4); align-items: start;">
 
         <div class="parchment" style="font-size: var(--type-base); line-height: 1.65;">
-          <p style="font-family: var(--font-display); font-style: italic; color: var(--oxblood); font-size: var(--type-md); margin-bottom: var(--s-2);">A letter, in Sapolsky&apos;s hand</p>
+          <p style="font-family: var(--font-display); font-style: italic; color: var(--oxblood); font-size: var(--type-md); margin-bottom: var(--s-2);">A letter, in Sapolsky\u0027s hand</p>
           ${raw(SAPOLSKY_LETTER)}
         </div>
 
         <div class="stack">
           <div class="parchment">
             <h4 style="color: var(--oxblood); font-style: italic; margin-bottom: var(--s-2);">Your task</h4>
-            <p>Three candidate renderings of Sapolsky&apos;s argument in standard form. <strong>Pick the one that is most faithful to his actual reasoning.</strong></p>
+            <p>Three candidate renderings of Sapolsky\u0027s argument in standard form. <strong>Pick the one that is most faithful to his actual reasoning.</strong></p>
           </div>
 
           <div class="stack-tight" id="sf-options">
@@ -149,7 +149,7 @@ function onSfPick(root, id) {
   `;
 
   if (opt.correct) {
-    Casebook.deposit({ act: 3, stamp: 'Sapolsky reconstructed', quote: 'The student identified the faithful standard-form rendering of Sapolsky&apos;s argument against free will.' });
+    Casebook.deposit({ act: 3, stamp: 'Sapolsky reconstructed', quote: 'The student identified the faithful standard-form rendering of Sapolsky\u0027s argument against free will.' });
     fb.querySelector('#to-objection').addEventListener('click', () => {
       _state.beat = 'objection';
       drawBeat(root);
@@ -168,7 +168,7 @@ function drawObjection(root) {
 
       <div class="parchment">
         <h4 style="color: var(--oxblood); font-style: italic; margin-bottom: var(--s-2);">Your task</h4>
-        <p>Lestrade is attacking <strong>one specific premise</strong> of Sapolsky&apos;s argument. Identify which one.</p>
+        <p>Lestrade is attacking <strong>one specific premise</strong> of Sapolsky\u0027s argument. Identify which one.</p>
       </div>
 
       <div class="stack-tight" id="premise-options">
@@ -198,7 +198,7 @@ function onPremisePick(root, id) {
   const fb = root.querySelector('#premise-feedback');
   fb.innerHTML = html`
     <div class="feedback ${opt.correct ? 'correct' : 'partial'}">
-      <h4>${opt.correct ? 'Yes — that is exactly Lestrade&apos;s line' : 'Closer, but consider where Lestrade actually disagrees'}</h4>
+      <h4>${opt.correct ? 'Yes — that is exactly Lestrade\u0027s line' : 'Closer, but consider where Lestrade actually disagrees'}</h4>
       <p>${raw(opt.feedback)}</p>
       ${opt.correct ? html`
         <div class="row" style="justify-content: flex-end; margin-top: var(--s-2);">
@@ -211,7 +211,7 @@ function onPremisePick(root, id) {
   `;
 
   if (opt.correct) {
-    Casebook.deposit({ act: 3, stamp: 'Lestrade&apos;s premise', quote: 'Lestrade is a compatibilist: he attacks the inference from "inevitable from unchosen causes" to "not freely chosen" — premise three of Sapolsky&apos;s argument.' });
+    Casebook.deposit({ act: 3, stamp: 'Lestrade\u0027s premise', quote: 'Lestrade is a compatibilist: he attacks the inference from "inevitable from unchosen causes" to "not freely chosen" — premise three of Sapolsky\u0027s argument.' });
     fb.querySelector('#to-write').addEventListener('click', () => {
       _state.beat = 'write';
       drawBeat(root);
@@ -241,7 +241,7 @@ P3: ...
             aria-label="Argument editor"></textarea>
 
           <div class="row" style="gap: var(--s-2);">
-            <button class="btn" id="submit-btn">Submit to Sapolsky&apos;s phonograph</button>
+            <button class="btn" id="submit-btn">Submit to Sapolsky\u0027s phonograph</button>
             <button class="btn btn-secondary" id="clear-btn">Clear</button>
           </div>
 
@@ -316,7 +316,7 @@ async function onWriteSubmit(root) {
   }
 
   if (result.data.error === 'parse_failed') {
-    toast('Sapolsky&apos;s reply was unintelligible. Try sending again.', 'warning');
+    toast('Sapolsky\u0027s reply was unintelligible. Try sending again.', 'warning');
     return;
   }
 

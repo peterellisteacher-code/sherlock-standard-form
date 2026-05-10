@@ -14,7 +14,7 @@ export const ACT4_INTRO = {
     `Sherlock turns to Watson at the door of the murder room.`,
     `<em>"Eight hotspots, Watson. Examine them all. When you have read the room,
      pick a suspect, and present your case in standard form. I shall be reading the
-     Captain&apos;s service file. The hour is yours."</em>`
+     Captain\u0027s service file. The hour is yours."</em>`
   ]
 };
 
@@ -48,16 +48,16 @@ export const HOTSPOTS = [
     label: '4',
     x: 50, y: 70,
     title: 'A service revolver',
-    summary: 'Webley Mk II, .455 calibre. Discharged once, the cartridge in the chamber. The serial matches Captain Whitcombe&apos;s issue. The grip carries his initials. Mud on the heel — the same pale clay as the pocket-watch chain.',
-    casebook: 'The revolver IS the Captain&apos;s. Fired once. Same suburban clay-mud on the grip as the pocket-watch chain — links the weapon to outside-of-London earlier in the day.'
+    summary: 'Webley Mk II, .455 calibre. Discharged once, the cartridge in the chamber. The serial matches Captain Whitcombe\u0027s issue. The grip carries his initials. Mud on the heel — the same pale clay as the pocket-watch chain.',
+    casebook: 'The revolver IS the Captain\u0027s. Fired once. Same suburban clay-mud on the grip as the pocket-watch chain — links the weapon to outside-of-London earlier in the day.'
   },
   {
     id: 'outline',
     label: '5',
     x: 45, y: 58,
     title: 'The chalk outline',
-    summary: 'The body lay face-up beside the leather club-chair, three feet from the revolver. The wound was a single shot, mid-chest, fired from approximately six feet away — too far for the Captain&apos;s position behind the chair, where the steward says he was found. The angle of the wound suggests the shot came from the direction of the back-stair door, not the fireplace.',
-    casebook: 'Body position vs. revolver position vs. Captain&apos;s reported standing position do NOT line up. The shot came from the direction of the back-stair door, not where the Captain was standing.'
+    summary: 'The body lay face-up beside the leather club-chair, three feet from the revolver. The wound was a single shot, mid-chest, fired from approximately six feet away — too far for the Captain\u0027s position behind the chair, where the steward says he was found. The angle of the wound suggests the shot came from the direction of the back-stair door, not the fireplace.',
+    casebook: 'Body position vs. revolver position vs. Captain\u0027s reported standing position do NOT line up. The shot came from the direction of the back-stair door, not where the Captain was standing.'
   },
   {
     id: 'backstair',
@@ -72,15 +72,15 @@ export const HOTSPOTS = [
     label: '7',
     x: 65, y: 80,
     title: 'A small brass object',
-    summary: 'Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a Sikh khanda symbol. Punjabi work — the kind of identifier carried by attendants of Sikh temples in the home country. Not the Captain&apos;s. Lestrade&apos;s constable did not mark it.',
-    casebook: 'A small Sikh brass token (khanda symbol) was on the floor under the desk — Punjabi origin, NOT the Captain&apos;s. Someone of South Asian origin, almost certainly Sikh, has been in this room.'
+    summary: 'Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a Sikh khanda symbol. Punjabi work — the kind of identifier carried by attendants of Sikh temples in the home country. Not the Captain\u0027s. Lestrade\u0027s constable did not mark it.',
+    casebook: 'A small Sikh brass token (khanda symbol) was on the floor under the desk — Punjabi origin, NOT the Captain\u0027s. Someone of South Asian origin, almost certainly Sikh, has been in this room.'
   },
   {
     id: 'mud',
     label: '8',
     x: 30, y: 80,
     title: 'Footprint traces by the back-stair',
-    summary: 'On the corner of the rug nearest the back-stair: a partial footprint in pale clay-mud. Same colour and grain as the Captain&apos;s pocket-watch chain. The print is small — roughly a size 7 boot, narrower than a standard British military boot. The Captain wears a size 9.',
+    summary: 'On the corner of the rug nearest the back-stair: a partial footprint in pale clay-mud. Same colour and grain as the Captain\u0027s pocket-watch chain. The print is small — roughly a size 7 boot, narrower than a standard British military boot. The Captain wears a size 9.',
     casebook: 'A small (size 7), narrow boot-print in clay mud near the back-stair door. The Captain wears size 9. Someone with smaller feet entered through the back-stair.'
   }
 ];
@@ -95,8 +95,8 @@ export const SUSPECTS = [
   {
     id: 'hari',
     name: 'Hari Singh',
-    blurb: 'Brother of Naunihal Singh, the man the Captain killed in Multan. Per Mycroft, arrived from Liverpool on the 8.15. Mentioned in the Captain&apos;s telegram.',
-    note: 'Has motive (revenge for Multan), means (taken the Captain&apos;s revolver during a fugue), opportunity (the back-stair).'
+    blurb: 'Brother of Naunihal Singh, the man the Captain killed in Multan. Per Mycroft, arrived from Liverpool on the 8.15. Mentioned in the Captain\u0027s telegram.',
+    note: 'Has motive (revenge for Multan), means (taken the Captain\u0027s revolver during a fugue), opportunity (the back-stair).'
   },
   {
     id: 'steward',
@@ -107,15 +107,15 @@ export const SUSPECTS = [
 ];
 
 export const ACT4_WRITE_PROMPT = `Sherlock returns from the morning room with the
-Captain&apos;s service file under his arm. He looks drawn but alert.
+Captain\u0027s service file under his arm. He looks drawn but alert.
 <br><br>
 <em>"Lestrade has agreed to entertain a deductive argument from us. Time is short
-— Captain Whitcombe&apos;s execution is set for Saturday at six. Watson, name the
+— Captain Whitcombe\u0027s execution is set for Saturday at six. Watson, name the
 suspect you accuse and your case in standard form. The case must be SOUND, not
 merely valid. A valid argument with one false premise will hang the wrong man, or
 free the right one, or both."</em>
 <br><br>
-<em>"Take your time. The Reform Club&apos;s clocks are slow."</em>`;
+<em>"Take your time. The Reform Club\u0027s clocks are slow."</em>`;
 
 export const ACT4_BACK_TO_HOTSPOTS_REMINDER = `You may revisit any of the eight
 hotspots above before submitting.`;

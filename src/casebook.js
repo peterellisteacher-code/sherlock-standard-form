@@ -3,8 +3,8 @@
  * Available from anywhere via a fixed-position toggle button.
  */
 
-import { Casebook as State } from './core/state.js';
-import { html, raw, escape } from './core/components.js';
+import { Casebook as State } from './core/state.js?v=3';
+import { html, raw, escape } from './core/components.js?v=3';
 
 let _panel = null;
 let _openHandler = null;

@@ -3,9 +3,9 @@
  * Replays the case, summarises the philosophical work, prints a casebook digest.
  */
 
-import { Casebook } from './core/state.js';
-import { html, raw, escape, topbar } from './core/components.js';
-import { announce } from './core/nav.js';
+import { Casebook } from './core/state.js?v=3';
+import { html, raw, escape, topbar } from './core/components.js?v=3';
+import { announce } from './core/nav.js?v=3';
 
 export function render(root, _params) {
   const s = Casebook.get();
@@ -54,7 +54,7 @@ export function render(root, _params) {
         unnamed officer of the Political Department. The press will be told nothing.</p>
 
         ${act4Sound ? html`
-          <p>Hari Singh has not been found. He will not be. He has, by Mycroft&apos;s reluctant
+          <p>Hari Singh has not been found. He will not be. He has, by Mycroft\u0027s reluctant
           admission, the protection of a small but well-placed circle in Lahore who consider
           his act on Wednesday night the just consequence of an injustice committed by the
           British state in 1893. Holmes is not satisfied with this resolution but accepts it
@@ -62,8 +62,8 @@ export function render(root, _params) {
           We have not saved a guilty one. The two are different victories — one is achievable
           tonight; the other is the work of slower, larger institutions than ours."</em></p>
         ` : html`
-          <p>The truth of the Reform Club is — for the moment — out of reach. Captain Whitcombe&apos;s
-          life has been spared by Mycroft&apos;s direct intervention with the Home Secretary, but
+          <p>The truth of the Reform Club is — for the moment — out of reach. Captain Whitcombe\u0027s
+          life has been spared by Mycroft\u0027s direct intervention with the Home Secretary, but
           the sentence has been commuted rather than overturned. Holmes regards your argument
           as an honest piece of work that did not quite carry its conclusion. He looks forward,
           sardonically, to the next case in which you will do better.</p>
@@ -118,8 +118,8 @@ export function render(root, _params) {
         <p style="line-height: 1.65;">When you next see your teacher, you will be asked three things:</p>
         <ol style="text-align: left; max-width: 540px; margin: var(--s-2) auto; padding-left: var(--s-3);">
           <li style="margin-bottom: 8px;">Where in the case did you first feel the difference between a <em>strong</em> argument and a <em>cogent</em> one?</li>
-          <li style="margin-bottom: 8px;">In Act III, did you change your free-will argument after Sapolsky&apos;s challenge — or stand by it? Why?</li>
-          <li>In Act IV, was your argument valid but unsound at any point? What did Holmes&apos;s feedback teach you about the difference?</li>
+          <li style="margin-bottom: 8px;">In Act III, did you change your free-will argument after Sapolsky\u0027s challenge — or stand by it? Why?</li>
+          <li>In Act IV, was your argument valid but unsound at any point? What did Holmes\u0027s feedback teach you about the difference?</li>
         </ol>
       </div>
 

@@ -10,13 +10,13 @@
  * No AI calls. All branching is hand-authored.
  */
 
-import { Casebook } from '../core/state.js';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js';
-import { announce } from '../core/nav.js';
+import { Casebook } from '../core/state.js?v=3';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=3';
+import { announce } from '../core/nav.js?v=3';
 import {
   OPENING, CHOICE_AT_DOOR, TESTIMONY_INTRO, QUESTIONS, TESTIMONY_OUTRO,
   WATCH_INTRO, WATCH_HOTSPOTS, WATCH_OUTRO
-} from '../../data/act1-visitor.js';
+} from '../../data/act1-visitor.js?v=3';
 
 let _state = null;
 
@@ -435,7 +435,7 @@ function drawOutro(root) {
   Casebook.completeAct(1, {
     score: deductions.length,
     total: WATCH_HOTSPOTS.length,
-    epitaph: 'A late call answered. The watch read. The Captain&apos;s alibi shaken. Mycroft next.'
+    epitaph: 'A late call answered. The watch read. The Captain\u0027s alibi shaken. Mycroft next.'
   });
 
   root.innerHTML = html`
@@ -447,8 +447,8 @@ function drawOutro(root) {
 
       <div class="parchment stack-tight" style="text-align: left;">
         <p>Three questions put. Four observations recorded. A pocket-watch on a green leather desk, telling a different story to the one the Captain has confessed to.</p>
-        <p>Mrs Whitcombe&apos;s case-file lies open. Her brother has three days.</p>
-        <p>Mycroft will know what business James Whitcombe was on in the Punjab — but Mycroft is, in Sherlock&apos;s phrase, <em>"the British Government when in a particularly bad mood."</em> He does not part with secrets cheaply. <strong>You will need to argue for them.</strong></p>
+        <p>Mrs Whitcombe\u0027s case-file lies open. Her brother has three days.</p>
+        <p>Mycroft will know what business James Whitcombe was on in the Punjab — but Mycroft is, in Sherlock\u0027s phrase, <em>"the British Government when in a particularly bad mood."</em> He does not part with secrets cheaply. <strong>You will need to argue for them.</strong></p>
       </div>
 
       <div class="row" style="justify-content: center; gap: var(--s-2);">

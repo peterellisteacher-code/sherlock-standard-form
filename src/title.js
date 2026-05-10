@@ -3,8 +3,8 @@
  * Detective name capture, narrative framing, four-act picker.
  */
 
-import { Casebook } from './core/state.js';
-import { html, raw, escape, modal } from './core/components.js';
+import { Casebook } from './core/state.js?v=3';
+import { html, raw, escape, modal } from './core/components.js?v=3';
 
 const ACTS = [
   {
@@ -55,7 +55,7 @@ export function render(root, _params) {
           <div class="panel" style="margin-bottom: var(--s-5); max-width: 520px; margin-left: auto; margin-right: auto;">
             <h3 style="margin-bottom: var(--s-2);">Sign the casebook</h3>
             <p style="color: var(--chalk-mute); margin-bottom: var(--s-2); font-size: 15px;">
-              Holmes&apos;s files will be addressed to you for the duration of the inquiry.
+              Holmes\u0027s files will be addressed to you for the duration of the inquiry.
             </p>
             <form id="detective-form" class="row" style="gap: var(--s-2); align-items: stretch;">
               <input id="detective-name" type="text" placeholder="Your name (or a pseudonym)" maxlength="32" required
@@ -70,7 +70,7 @@ export function render(root, _params) {
         `}
 
         <div class="title-acts" id="acts">
-          ${ACTS.map(a => actTile(a, s)).join('')}
+          ${ACTS.map(a => actTile(a, s))}
         </div>
 
         ${allDone ? html`

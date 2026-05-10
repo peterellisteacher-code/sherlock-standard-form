@@ -17,7 +17,7 @@ export const OPENING = {
   body: [
     `Holmes is at the docks. He left a note. <em>"Investigating the matter of the
      Romanian shipping clerk. Back by Thursday morning. Do not eat my anchovies."</em>`,
-    `You are at the desk, attempting Watson&apos;s memoir of the Reichenbach business.
+    `You are at the desk, attempting Watson\u0027s memoir of the Reichenbach business.
      The fire is low. The fog has come up from the river and pressed itself against the
      parlour windows like a poorly-mannered acquaintance. The clock above the mantel
      reads thirteen minutes to midnight.`,
@@ -27,7 +27,7 @@ export const OPENING = {
 };
 
 export const CHOICE_AT_DOOR = {
-  prompt: 'A late call. Holmes&apos;s rule on visitors after eleven is that there should be none. What do you do?',
+  prompt: 'A late call. Holmes\u0027s rule on visitors after eleven is that there should be none. What do you do?',
   options: [
     {
       id: 'open',
@@ -40,7 +40,7 @@ export const CHOICE_AT_DOOR = {
     },
     {
       id: 'window',
-      label: 'Look from the window first — Holmes&apos;s precaution.',
+      label: 'Look from the window first — Holmes\u0027s precaution.',
       after: `From the window you see her plain enough — a woman in deep mourning, the
               gas-lamp catching the rain on her shoulders. She has come a long way
               tonight; the hem of her travelling cloak is grey to the knee. By the time
@@ -52,7 +52,7 @@ export const CHOICE_AT_DOOR = {
 };
 
 export const TESTIMONY_INTRO = `She places a heavy leather case-file on the desk
-beside Watson&apos;s memoir, removes her wet gloves with the precision of someone
+beside Watson\u0027s memoir, removes her wet gloves with the precision of someone
 trying very hard not to fall apart, and sits.
 <br><br>
 <em>"My name is Eleanor Whitcombe. My brother is Captain James Whitcombe of the
@@ -65,14 +65,14 @@ say so to the only man in England who might listen. Mr Holmes is — I see — n
 here. So I shall have to settle for you."</em>
 <br><br>
 She opens the case-file. Inside: a sheaf of documents, a folded telegram, a
-gentleman&apos;s pocket-watch, and a single dried rose.
+gentleman\u0027s pocket-watch, and a single dried rose.
 <br><br>
 <strong>Ask her three questions.</strong>`;
 
 /**
  * Six questions; the student picks three. Each adds an entry to the casebook.
  * Some pairs are mutually exclusive (lock out the other once chosen) so the
- * student can&apos;t simply pick everything.
+ * student can\u0027t simply pick everything.
  */
 export const QUESTIONS = [
   {
@@ -83,9 +83,9 @@ export const QUESTIONS = [
              dined there together. The door was locked from the inside — a Yale lock, the
              key still in its socket. The single window was painted shut. Sir Arthur lay
              dead on the rug, shot through the chest at close range. James was standing by
-             the fire, my brother&apos;s service revolver — discharged once — at his feet.
-             When the steward broke down the door, James said only, &apos;I had to do it.
-             You could not understand.&apos; He has said almost nothing since."</em>`,
+             the fire, my brother\u0027s service revolver — discharged once — at his feet.
+             When the steward broke down the door, James said only, \u0027I had to do it.
+             You could not understand.\u0027 He has said almost nothing since."</em>`,
     casebook: 'A locked room. Single window painted shut. Captain Whitcombe found beside the body, his service revolver fired once, on the rug.'
   },
   {
@@ -109,22 +109,22 @@ export const QUESTIONS = [
              books and walk away. But James was not a vengeful man. He came home from
              the army with no taste for argument."</em> She frowns.
              <em>"And yet — Sir Arthur held something over him. James once said,
-             &apos;The man knows what happened at Multan, and I cannot have him telling
-             it.&apos; I do not know what he meant."</em>`,
-    casebook: 'The Captain and his partner were dissolving their import business. Sir Arthur "knew what happened at Multan" — a piece of leverage from the Captain&apos;s military past.'
+             \u0027The man knows what happened at Multan, and I cannot have him telling
+             it.\u0027 I do not know what he meant."</em>`,
+    casebook: 'The Captain and his partner were dissolving their import business. Sir Arthur "knew what happened at Multan" — a piece of leverage from the Captain\u0027s military past.'
   },
   {
     id: 'himself',
     text: 'Has the Captain been himself? Since returning, I mean.',
     locks: ['lastsaw'],
     answer: `<em>"That is the question I cannot answer, sir. He is and he is not. He
-             returned in March of last year, with a fever they called &apos;jungle
-             fever&apos; — though the surgeon at Aldershot thought it more likely some
+             returned in March of last year, with a fever they called \u0027jungle
+             fever\u0027 — though the surgeon at Aldershot thought it more likely some
              form of brain-fever. Since then, he is given to long silences and sudden
              alarms. He keeps a journal in which he writes things he does not
              remember writing. Once I found him in his garden at three in the morning,
              digging."</em>`,
-    casebook: 'After a fever in the Punjab, the Captain has been subject to amnesias and dissociations — writing things he doesn&apos;t remember writing; once digging in his garden at 3am with no memory of why.'
+    casebook: 'After a fever in the Punjab, the Captain has been subject to amnesias and dissociations — writing things he doesn\u0027t remember writing; once digging in his garden at 3am with no memory of why.'
   },
   {
     id: 'why',
@@ -133,26 +133,26 @@ export const QUESTIONS = [
     answer: `<em>"Because the police are satisfied. The judge is satisfied. The
              newspapers are satisfied. James himself is satisfied. The only person on
              the Earth who is not satisfied that James shot Sir Arthur Pelham is me.
-             And I do not know whether my conviction is sister&apos;s love or
+             And I do not know whether my conviction is sister\u0027s love or
              evidence."</em>
              She looks at you steadily.
              <em>"Mr Holmes, I am told, has the rare habit of treating evidence and
              love as separate questions. I should like to know which I have."</em>`,
-    casebook: 'Mrs Whitcombe explicitly distinguishes "sister&apos;s love" from "evidence." She has come for evaluation, not consolation.'
+    casebook: 'Mrs Whitcombe explicitly distinguishes "sister\u0027s love" from "evidence." She has come for evaluation, not consolation.'
   },
   {
     id: 'casefile',
     text: 'And the case-file — what is in it?',
     locks: [],
-    answer: `<em>"The inquest report. James&apos;s service record from the regimental
+    answer: `<em>"The inquest report. James\u0027s service record from the regimental
              office at Horse Guards — what was made public, in any case. Three letters
              from Sir Arthur to my brother in the months before his death — the last
              of them a threat. A telegram James received an hour before the murder
-             which I cannot account for; it reads, &apos;He arrives the eight-fifteen.
-             Be ready.&apos; And — this."</em>
-             She lifts a gentleman&apos;s pocket-watch from the file and lays it on
+             which I cannot account for; it reads, \u0027He arrives the eight-fifteen.
+             Be ready.\u0027 And — this."</em>
+             She lifts a gentleman\u0027s pocket-watch from the file and lays it on
              the desk under the lamp.
-             <em>"It was found in James&apos;s coat at the Reform Club. It is not his
+             <em>"It was found in James\u0027s coat at the Reform Club. It is not his
              watch. It bears his initials, but not in his hand. I cannot say more than
              that."</em>`,
     casebook: 'Items in the file: inquest report; service record; three Pelham letters (the last a threat); a telegram — "He arrives the eight-fifteen. Be ready." And the pocket-watch — bearing JTW initials but in an unfamiliar hand.'
@@ -172,7 +172,7 @@ There is no chance of sleep tonight.`;
 
 /**
  * The pocket-watch hotspot scene. Four hotspots; each is a small puzzle with
- * three multiple-choice options and Holmes&apos;s telegram-style reaction.
+ * three multiple-choice options and Holmes\u0027s telegram-style reaction.
  * The hotspots are positioned over the watch.webp illustration as percentages
  * of the image dimensions.
  */
@@ -188,11 +188,11 @@ export const WATCH_HOTSPOTS = [
     y: 45,
     title: 'The monogram',
     detail: 'Three letters engraved into the inside of the case, in a slanted hand: <strong>J · T · W</strong>.',
-    holmes_telegram: 'JTW. CAPTAIN&apos;S NAME IS JAMES WHITCOMBE. WHAT MIGHT THE T BE? - SH',
+    holmes_telegram: 'JTW. CAPTAIN\u0027S NAME IS JAMES WHITCOMBE. WHAT MIGHT THE T BE? - SH',
     options: [
       {
         id: 'theodore',
-        text: 'Theodore. The Captain&apos;s middle name. Mrs Whitcombe will know.',
+        text: 'Theodore. The Captain\u0027s middle name. Mrs Whitcombe will know.',
         correct: true,
         holmes: 'GOOD. ASK HER. IF SHE SAYS NO MIDDLE NAME OR DIFFERENT INITIAL, WATCH IS NOT HIS. - SH',
         casebook: 'The watch is engraved JTW. If James has no middle initial T, it is not his watch — though his sister says it bore his name.'
@@ -202,7 +202,7 @@ export const WATCH_HOTSPOTS = [
         text: 'Tobias, perhaps. A common Victorian name.',
         correct: false,
         holmes: 'GUESSING IS NOT DEDUCING. WHO MIGHT YOU ASK? - SH',
-        hint: 'There is someone in the room with you who could simply tell you the Captain&apos;s middle name.'
+        hint: 'There is someone in the room with you who could simply tell you the Captain\u0027s middle name.'
       },
       {
         id: 'jeweller',
@@ -219,7 +219,7 @@ export const WATCH_HOTSPOTS = [
     x: 65,
     y: 30,
     title: 'A crack across the glass',
-    detail: 'A single sharp crack runs from the 1 o&apos;clock position diagonally to the 7 o&apos;clock — straight through the centre.',
+    detail: 'A single sharp crack runs from the 1 o\u0027clock position diagonally to the 7 o\u0027clock — straight through the centre.',
     holmes_telegram: 'CRACK IS A WITNESS. WHAT DID IT SEE? - SH',
     options: [
       {
@@ -238,7 +238,7 @@ export const WATCH_HOTSPOTS = [
       },
       {
         id: 'pocket',
-        text: 'It was in the Captain&apos;s pocket when he fell.',
+        text: 'It was in the Captain\u0027s pocket when he fell.',
         correct: false,
         holmes: 'A WATCH IN A POCKET STRUCK SIDEWAYS. THIS FRACTURE IS PERPENDICULAR TO THE FACE. RECONSIDER. - SH',
         hint: 'Pocket-impacts hit the side of the watch, not the face. Look at how the crack runs.'
@@ -272,7 +272,7 @@ export const WATCH_HOTSPOTS = [
         id: 'unwound',
         text: 'It simply ran out of spring at 11:14, by chance.',
         correct: false,
-        holmes: 'GENTLEMAN&apos;S WATCH IS WOUND DAILY. CAPTAIN ARRESTED THAT EVENING. RECONSIDER. - SH',
+        holmes: 'GENTLEMAN\u0027S WATCH IS WOUND DAILY. CAPTAIN ARRESTED THAT EVENING. RECONSIDER. - SH',
         hint: 'Officers wind their watches each morning. An unwound watch on the night of an arrest is very unlikely.'
       }
     ]
@@ -297,12 +297,12 @@ export const WATCH_HOTSPOTS = [
         id: 'cleaning',
         text: 'A cleaning agent has discoloured the chain.',
         correct: false,
-        holmes: 'A WATCH-MAKER&apos;S CLEANER IS NEUTRAL. THIS RESIDUE IS SOIL. RECONSIDER. - SH',
+        holmes: 'A WATCH-MAKER\u0027S CLEANER IS NEUTRAL. THIS RESIDUE IS SOIL. RECONSIDER. - SH',
         hint: 'Run a finger across it. It rolls and crumbles like dirt — not like a chemical residue.'
       },
       {
         id: 'pocket',
-        text: 'It picked up dirt inside the Captain&apos;s coat pocket.',
+        text: 'It picked up dirt inside the Captain\u0027s coat pocket.',
         correct: false,
         holmes: 'COAT POCKETS DO NOT GENERATE CLAY MUD. WATCH WAS DIRECTLY EXPOSED. RECONSIDER. - SH',
         hint: 'A pocket protects from external contamination. This mud came from outside the coat, not within.'
@@ -311,12 +311,12 @@ export const WATCH_HOTSPOTS = [
   }
 ];
 
-export const WATCH_OUTRO = `You set the watch down. Holmes&apos;s last telegram —
+export const WATCH_OUTRO = `You set the watch down. Holmes\u0027s last telegram —
 fifteen minutes ago, by the clock above the mantel — reads:
 <br><br>
 <em>"WATSON. STOP. THE WATCH TELLS A STORY THE CAPTAIN HAS NOT. STOP. MUD AND
 TIME-STOP IMPLY HE WAS NOT AT THE REFORM CLUB AT ELEVEN. STOP. BUT BEFORE WE
-PURSUE THE MURDER WE NEED THE BUSINESS. STOP. CAPTAIN&apos;S LAST POSTING WAS
+PURSUE THE MURDER WE NEED THE BUSINESS. STOP. CAPTAIN\u0027S LAST POSTING WAS
 NOT WHAT THE PAPERS SAY. STOP. ONLY MYCROFT KNOWS WHY. STOP. HE WILL NOT PART
 WITH SECRETS CHEAPLY. STOP. YOU MUST ARGUE FOR THEM, AND ARGUE WELL. STOP. -
 SH"</em>

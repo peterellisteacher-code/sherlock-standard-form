@@ -4,14 +4,14 @@
  * student writes a deductive argument; Holmes-AI evaluates validity + soundness.
  */
 
-import { Casebook } from '../core/state.js';
-import { judge } from '../core/ai-client.js';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js';
-import { announce, navigate } from '../core/nav.js';
+import { Casebook } from '../core/state.js?v=3';
+import { judge } from '../core/ai-client.js?v=3';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=3';
+import { announce, navigate } from '../core/nav.js?v=3';
 import {
   ACT4_INTRO, HOTSPOTS, SUSPECTS,
   ACT4_WRITE_PROMPT, ACT4_BACK_TO_HOTSPOTS_REMINDER, ACT4_FAIL_HINT
-} from '../../data/act4-investigation.js';
+} from '../../data/act4-investigation.js?v=3';
 
 let _state = null;
 
@@ -281,7 +281,7 @@ P4: ...
             <h4>Holmes will check</h4>
             <ul>
               <li><strong>Validity</strong> — if the premises are all true, does the conclusion follow with certainty?</li>
-              <li><strong>Soundness</strong> — are the premises actually true given the evidence we&apos;ve gathered?</li>
+              <li><strong>Soundness</strong> — are the premises actually true given the evidence we\u0027ve gathered?</li>
             </ul>
             <p style="font-style: italic; margin-top: var(--s-2); font-size: 14px;">A valid argument with even ONE false premise is unsound. Both must hold.</p>
           </div>
@@ -303,7 +303,7 @@ P4: ...
               <li>Telegram: <em>"He arrives the eight-fifteen. Be ready."</em> — Foreign Office code for an arriving informer.</li>
               <li>Mycroft: the Captain killed Naunihal Singh in Multan, 1893. Pelham was using this for blackmail.</li>
               <li>Mycroft: there is a Hari Singh, brother of Naunihal, who took the train from Liverpool that arrives Paddington at 8.15.</li>
-              <li>The Captain&apos;s mental state: documented fugues since the Punjab fever.</li>
+              <li>The Captain\u0027s mental state: documented fugues since the Punjab fever.</li>
             </ul>
           </div>
         </aside>
@@ -352,7 +352,7 @@ async function onSubmit(root, suspect) {
     return;
   }
   if (result.data.error === 'parse_failed') {
-    toast('Holmes&apos;s reply was unintelligible. Try sending again.', 'warning');
+    toast('Holmes\u0027s reply was unintelligible. Try sending again.', 'warning');
     return;
   }
 

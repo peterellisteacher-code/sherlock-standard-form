@@ -9,12 +9,12 @@ export const ACT2_INTRO = {
   body: [
     `The Diogenes Club is a strange institution. By rule, no member may speak to another
      in the public rooms, on pain of expulsion at the third offence. Even Mycroft Holmes
-     observes this rule everywhere except his Strangers&apos; Room.`,
-    `He is in the Strangers&apos; Room now, in the largest leather chair you have ever
+     observes this rule everywhere except his Strangers\u0027 Room.`,
+    `He is in the Strangers\u0027 Room now, in the largest leather chair you have ever
      seen, with a brandy he has not lifted and a London <em>Times</em> he is not reading.
      He raises one eyebrow as you enter.`,
     `<em>"Watson. At this hour. I assume my brother has put you up to something irregular."</em>`,
-    `You explain Mrs Whitcombe&apos;s case. Mycroft listens without moving. When you finish,
+    `You explain Mrs Whitcombe\u0027s case. Mycroft listens without moving. When you finish,
      he sets down the <em>Times</em>.`,
     `<em>"I shall tell you what you wish to know, Watson — provided you can convince me
      it is worth the telling. I am, as you know, a creature of LOGIC. Not eloquence,
@@ -37,7 +37,7 @@ export const MYCROFT_LEVELS = [
     stage: 'mycroft-1',
     title: 'Level the First — A Thing That Has the Shape of an Argument',
     persona: 'Mycroft is feeling generous tonight. He will accept anything that has the basic shape of an inductive argument.',
-    proposition: `Convince Mycroft that <strong>Captain Whitcombe&apos;s service in the Punjab might have involved Foreign Office business</strong> — i.e. that Mycroft&apos;s department might know something the public records don&apos;t.`,
+    proposition: `Convince Mycroft that <strong>Captain Whitcombe\u0027s service in the Punjab might have involved Foreign Office business</strong> — i.e. that Mycroft\u0027s department might know something the public records don\u0027t.`,
     rubric: [
       'At least <strong>two premises</strong> (P1, P2) and a <strong>marked conclusion</strong> (∴ C).',
       'The conclusion is presented as <strong>probable</strong>, not certain.',
@@ -57,7 +57,7 @@ P2: ...
       'Standard form, marked conclusion, inductive (probable conclusion).',
       '<strong>At least two distinct LINES of evidence.</strong> A single observation rephrased is one line, not two. Examples of distinct lines: linguistic (the word choice), contextual (timing, sender), behavioural (how the Captain reacted), inferential (what an arrival implies).'
     ],
-    placeholder: `P1: The telegram&apos;s phrasing — "He arrives" rather than a name — is unusual for trade...
+    placeholder: `P1: The telegram\u0027s phrasing — "He arrives" rather than a name — is unusual for trade...
 P2: ...
 P3: ...
 ∴ C: ...`
@@ -67,10 +67,10 @@ P3: ...
     stage: 'mycroft-3',
     title: 'Level the Third — Cogency. Premises That Hold Up.',
     persona: 'A strong argument from unsupported premises is, to Mycroft, theatre. He wants COGENCY.',
-    proposition: `Convince Mycroft that <strong>the Captain&apos;s confession should not be taken at face value</strong>, given his mental state since returning from the Punjab.`,
+    proposition: `Convince Mycroft that <strong>the Captain\u0027s confession should not be taken at face value</strong>, given his mental state since returning from the Punjab.`,
     rubric: [
       'Standard form, marked conclusion, inductive, multiple distinct lines (Level 2 standards still apply).',
-      '<strong>Every premise must be plausibly TRUE</strong>, supportable by something we know — Mrs Whitcombe&apos;s testimony, the Captain&apos;s medical history, the wider context. Bare assertions ("The Captain is clearly insane") are NOT cogent unless backed by evidence.'
+      '<strong>Every premise must be plausibly TRUE</strong>, supportable by something we know — Mrs Whitcombe\u0027s testimony, the Captain\u0027s medical history, the wider context. Bare assertions ("The Captain is clearly insane") are NOT cogent unless backed by evidence.'
     ],
     placeholder: `P1: According to Mrs Whitcombe, the Captain has had episodes of...
 P2: ...
@@ -86,14 +86,14 @@ P3: ...
     proposition: `Rebut Mycroft. <strong>Construct an inductive argument that engages directly with his "confession is sufficient" claim.</strong> At least one premise must challenge the assumption that a confession is reliable evidence.`,
     rubric: [
       'All Level 1-3 standards (form, inductive, multiple distinct lines, cogent premises).',
-      '<strong>You must directly engage with Mycroft&apos;s counter-claim.</strong> Not merely an argument that ignores it.',
-      'At least one premise should challenge the implicit assumption that confession = reliability (drawing on the Captain&apos;s mental state, the interrogator&apos;s record, contradictions between confession and physical evidence).'
+      '<strong>You must directly engage with Mycroft\u0027s counter-claim.</strong> Not merely an argument that ignores it.',
+      'At least one premise should challenge the implicit assumption that confession = reliability (drawing on the Captain\u0027s mental state, the interrogator\u0027s record, contradictions between confession and physical evidence).'
     ],
-    placeholder: `P1: Mycroft&apos;s claim assumes that a confession is reliable evidence of guilt. But...
+    placeholder: `P1: Mycroft\u0027s claim assumes that a confession is reliable evidence of guilt. But...
 P2: ...
 P3: ...
 P4: ...
-∴ C: Therefore, Mycroft&apos;s "confession is sufficient" position should be rejected.`
+∴ C: Therefore, Mycroft\u0027s "confession is sufficient" position should be rejected.`
   }
 ];
 
@@ -103,11 +103,11 @@ export const ACT2_OUTRO = {
      bulk, and crosses to a tall walnut secretary. From its third drawer he withdraws
      a sealed envelope marked, in red, <strong>POLITICAL DEPARTMENT — NOT FOR
      CIRCULATION</strong>. He hands it to you without ceremony.`,
-    `<em>"You have your operational briefing, Watson. The Captain&apos;s service in the
-     Punjab was no quiet quartermaster&apos;s posting. The motive for the Reform Club
+    `<em>"You have your operational briefing, Watson. The Captain\u0027s service in the
+     Punjab was no quiet quartermaster\u0027s posting. The motive for the Reform Club
      murder is real — but motive is not commission, as I trust my brother has impressed
      upon you."</em>`,
-    `You are halfway out of the Strangers&apos; Room when Mycroft adds, in his most
+    `You are halfway out of the Strangers\u0027 Room when Mycroft adds, in his most
      bored voice:`,
     `<em>"Oh — and Watson. Whoever killed Pelham knew of Multan. So either the Captain
      did it; or someone with reason to know what the Captain did, did it. Find them.

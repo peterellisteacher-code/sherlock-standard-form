@@ -7,11 +7,11 @@
  * structured JSON.
  */
 
-import { Casebook } from '../core/state.js';
-import { judge } from '../core/ai-client.js';
-import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js';
-import { announce } from '../core/nav.js';
-import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js';
+import { Casebook } from '../core/state.js?v=3';
+import { judge } from '../core/ai-client.js?v=3';
+import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=3';
+import { announce } from '../core/nav.js?v=3';
+import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=3';
 
 let _state = null;
 
@@ -45,7 +45,7 @@ function drawBeat(root) {
 
 function drawIntro(root) {
   root.innerHTML = html`
-    ${raw(topbar({ act: 2, name: 'Convince Mycroft', progress: 'The Strangers&apos; Room' }))}
+    ${raw(topbar({ act: 2, name: 'Convince Mycroft', progress: 'The Strangers\u0027 Room' }))}
 
     <div class="stage stage-narrow stack-wide">
       <header class="stack-tight">
@@ -127,7 +127,7 @@ function drawLevel(root) {
 
         <aside class="stack">
           <div class="shelf">
-            <h4>Mycroft&apos;s rubric</h4>
+            <h4>Mycroft\u0027s rubric</h4>
             <ul>
               ${level.rubric.map(r => html`<li>${raw(r)}</li>`)}
             </ul>

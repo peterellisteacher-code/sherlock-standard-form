@@ -4,14 +4,19 @@
  */
 
 export function html(strings, ...values) {
-  // Tagged template that escapes embedded values UNLESS they're {raw: '...'} or arrays.
+  // Tagged template. Returns a "raw HTML" marker object so nested html`...`
+  // interpolations pass through unescaped. Stringifies for innerHTML assignment.
   let out = strings[0];
   for (let i = 0; i < values.length; i++) {
     const v = values[i];
-    if (v == null) {
+    if (v == null || v === false) {
       // skip
     } else if (Array.isArray(v)) {
-      out += v.join('');
+      for (const el of v) {
+        if (el == null || el === false) continue;
+        if (typeof el === 'object' && el && 'raw' in el) out += el.raw;
+        else out += escape(String(el));
+      }
     } else if (typeof v === 'object' && v && 'raw' in v) {
       out += v.raw;
     } else {
@@ -19,7 +24,7 @@ export function html(strings, ...values) {
     }
     out += strings[i + 1];
   }
-  return out;
+  return { raw: out, toString() { return out; } };
 }
 
 export function raw(s) { return { raw: String(s) }; }
