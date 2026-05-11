@@ -8,7 +8,7 @@
     "deploy": "netlify deploy --prod"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.40.0",
+    "@anthropic-ai/sdk": "^0.55.0",
     "@netlify/functions": "^2.8.0"
   },
   "engines": {
