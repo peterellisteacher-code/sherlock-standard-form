@@ -316,7 +316,7 @@ function buildSystem(stage) {
   return [{
     type: 'text',
     text,
-    cache_control: { type: 'ephemeral', ttl: '1h' }
+    cache_control: { type: 'ephemeral', ttl: 3600 }
   }];
 }
 
@@ -453,12 +453,19 @@ export default async (req, _context) => {
 
     return Response.json(parsed, { status: 200 });
   } catch (err) {
-    const status = err?.status >= 400 && err?.status < 600 ? err.status : 500;
-    console.error('judge function error:', err.message || err);
-    return Response.json(
-      { error: err.message || 'Internal error', stage },
-      { status }
-    );
+    // Never forward upstream 401/403 to the browser — those are credential
+    // issues on the server side, not the client's problem. Map them to 503
+    // so the frontend shows a "try again" message rather than a misleading
+    // auth error. Other 4xx (bad request, rate limit) pass through unchanged.
+    const upstreamStatus = err?.status;
+    const status = upstreamStatus === 401 || upstreamStatus === 403
+      ? 503
+      : (upstreamStatus >= 400 && upstreamStatus < 600 ? upstreamStatus : 500);
+    const message = upstreamStatus === 401 || upstreamStatus === 403
+      ? 'AI service credentials error — please contact the site owner.'
+      : (err.message || 'Internal error');
+    console.error('judge function error:', { stage, status: upstreamStatus, message: err.message || err });
+    return Response.json({ error: message, stage }, { status });
   }
 };
 
