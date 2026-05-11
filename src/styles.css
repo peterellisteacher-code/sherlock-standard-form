@@ -594,6 +594,19 @@ button:disabled {
 }
 .modal h2 { margin-bottom: var(--s-3); }
 
+/* === Keyword highlighting (evidence scaffolding) === */
+.keyword {
+  background: rgba(184, 153, 104, 0.18);
+  border-bottom: 2px solid var(--brass);
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+.parchment .keyword {
+  background: rgba(107, 31, 31, 0.10);
+  border-bottom-color: var(--oxblood);
+}
+
 /* === Casebook (cross-act dossier) === */
 .casebook-toggle {
   position: fixed;

@@ -22,7 +22,7 @@ const EVIDENCE = [
     title: "A gentleman's pocket-watch",
     sprite: '/assets/pixel/item-watch.png',
     x: 0.78, y: 0.74,
-    examine: `Half-hunter case, gold. Open in your hand it shows the dial stopped at <strong>11:14</strong>. A single sharp crack runs diagonally across the glass; the chain is smeared with pale clay mud — suburban soil, not central London. Inside the case, three letters: <strong>J · T · W</strong>. The Captain's name is James — his sister might know the middle initial.`,
+    examine: `Half-hunter case, gold. Open in your hand it shows the dial <span class="keyword">stopped at <strong>11:14</strong></span>. A single sharp crack runs diagonally across the glass; the chain is smeared with <span class="keyword">pale clay mud — suburban soil, not central London</span>. Inside the case, three letters: <span class="keyword"><strong>J · T · W</strong></span>. The Captain's name is James — his sister might know the middle initial.`,
     relevant: "Stopped at 11:14 (body found at 11:30 — sixteen-minute gap). Clay mud on the chain suggests the watch was outdoors hours before the murder, but the Captain claims he was at the Club all evening. JTW monogram needs Mrs Whitcombe to confirm.",
     discardWhy: 'A scratched watch on its own proves little.'
   },
@@ -31,7 +31,7 @@ const EVIDENCE = [
     title: 'A folded telegram',
     sprite: '/assets/pixel/item-telegram.png',
     x: 0.88, y: 0.66,
-    examine: `Yellow post-office paper, the wax seal broken once already. Inside, eight words: <em>"He arrives the eight-fifteen. Be ready."</em> Mrs Whitcombe says James received this an hour before the murder. She cannot account for it.`,
+    examine: `Yellow post-office paper, the wax seal broken once already. Inside, eight words: <span class="keyword"><em>"He arrives the eight-fifteen. Be ready."</em></span> Mrs Whitcombe says James received this <span class="keyword">an hour before the murder</span>. She cannot account for it.`,
     relevant: "A telegram an hour before the killing: 'He arrives the eight-fifteen. Be ready.' Mrs Whitcombe cannot explain it. The phrasing is unusual for trade.",
     discardWhy: 'A telegram with no clear sender is hard to use.'
   },
@@ -49,7 +49,7 @@ const EVIDENCE = [
     title: 'Three letters tied with ribbon',
     sprite: '/assets/pixel/item-letters.png',
     x: 0.16, y: 0.62,
-    examine: `Three letters from Sir Arthur Pelham to Captain Whitcombe, sent over the months preceding the murder. The third — sealed differently — opens with: <em>"James, my patience is at its end. If we cannot resolve our accounts in private, we shall do so very publicly indeed. I shall be at the Club Wednesday."</em>`,
+    examine: `Three letters from Sir Arthur Pelham to Captain Whitcombe, sent over the months preceding the murder. The third — sealed differently — opens with: <em>"James, my patience is at its end. If we cannot resolve our accounts in private, <span class="keyword">we shall do so very publicly indeed. I shall be at the Club Wednesday.</span>"</em>`,
     relevant: "Three letters from Pelham to the Captain. The third is explicitly threatening: 'we shall resolve our accounts … very publicly indeed.' Pelham held something over him.",
     discardWhy: 'Old correspondence between business partners.'
   },
@@ -58,7 +58,7 @@ const EVIDENCE = [
     title: "The Captain's service medal",
     sprite: '/assets/pixel/item-medal.png',
     x: 0.42, y: 0.16,
-    examine: `Bronze, octagonal, the Indian Service Medal — awarded for service in the colonial campaigns. The ribbon is faded crimson with two green stripes. Mrs Whitcombe says they would not let him wear it home from prison; she has kept it for him. The reverse is inscribed: <em>"For Multan, 1893."</em>`,
+    examine: `Bronze, octagonal, the Indian Service Medal — awarded for service in the colonial campaigns. The ribbon is faded crimson with two green stripes. Mrs Whitcombe says they would not let him wear it home from prison; she has kept it for him. The reverse is inscribed: <span class="keyword"><em>"For Multan, 1893."</em></span>`,
     relevant: "The Captain's service medal: 'For Multan, 1893.' Whatever happened at Multan, Pelham knew. Mrs Whitcombe confirms it was the leverage in their business dispute.",
     discardWhy: 'A medal is decoration, not evidence.'
   },
@@ -67,7 +67,7 @@ const EVIDENCE = [
     title: 'The leather case-file',
     sprite: '/assets/pixel/item-casefile.png',
     x: 0.62, y: 0.78,
-    examine: `Mrs Whitcombe's portfolio. Inside: the inquest report, the Captain's public service record from Horse Guards, and — at the back, paper-clipped — a discharge note from the regimental surgeon at Aldershot. The note is brief: <em>"Capt. J. T. Whitcombe, 23rd Foot. Returned from Punjab with prolonged fever. Marked episodes of fugue and confessional disorientation. Recommend cautious return to civil life."</em>`,
+    examine: `Mrs Whitcombe's portfolio. Inside: the inquest report, the Captain's public service record from Horse Guards, and — at the back, paper-clipped — a discharge note from the regimental surgeon at Aldershot. The note is brief: <em>"Capt. J. T. Whitcombe, 23rd Foot. Returned from Punjab with prolonged fever. <span class="keyword">Marked episodes of fugue and confessional disorientation.</span> Recommend cautious return to civil life."</em>`,
     relevant: "The Captain's discharge note from Aldershot: 'Marked episodes of fugue and confessional disorientation.' His confession to the murder may not be a reliable record of fact.",
     discardWhy: 'Service records are public — Mycroft will have his own.'
   }

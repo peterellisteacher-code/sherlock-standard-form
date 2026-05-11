@@ -187,7 +187,7 @@ export const WATCH_HOTSPOTS = [
     x: 35,    // percent of image width
     y: 45,
     title: 'The monogram',
-    detail: 'Three letters engraved into the inside of the case, in a slanted hand: <strong>J · T · W</strong>.',
+    detail: 'Three letters engraved into the inside of the case, in a slanted hand: <span class="keyword"><strong>J · T · W</strong></span>.',
     holmes_telegram: 'JTW. CAPTAIN\u0027S NAME IS JAMES WHITCOMBE. WHAT MIGHT THE T BE? - SH',
     options: [
       {
@@ -219,7 +219,7 @@ export const WATCH_HOTSPOTS = [
     x: 65,
     y: 30,
     title: 'A crack across the glass',
-    detail: 'A single sharp crack runs from the 1 o\u0027clock position diagonally to the 7 o\u0027clock — straight through the centre.',
+    detail: 'A single sharp crack runs <span class="keyword">from the 1 o\u0027clock position diagonally to the 7 o\u0027clock</span> — straight through the centre.',
     holmes_telegram: 'CRACK IS A WITNESS. WHAT DID IT SEE? - SH',
     options: [
       {
@@ -251,7 +251,7 @@ export const WATCH_HOTSPOTS = [
     x: 50,
     y: 60,
     title: 'The hands have stopped',
-    detail: 'The hands have halted at <strong>11:14</strong>. The crown has not been wound; the spring is fully released.',
+    detail: 'The hands have halted at <span class="keyword"><strong>11:14</strong></span>. The crown has not been wound; the <span class="keyword">spring is fully released</span>.',
     holmes_telegram: 'STEWARD FOUND BODY AT 11.30. WHY DOES WATCH SAY 11.14? - SH',
     options: [
       {
@@ -283,7 +283,7 @@ export const WATCH_HOTSPOTS = [
     x: 25,
     y: 75,
     title: 'A trace of mud on the chain',
-    detail: 'The bottom links of the chain hold a streak of pale, gritty mud — not the dark Thames muck of central London, but a yellow-grey, clay-like soil.',
+    detail: 'The bottom links of the chain hold a streak of <span class="keyword">pale, gritty mud</span> — <span class="keyword">not the dark Thames muck of central London, but a yellow-grey, clay-like soil.</span>',
     holmes_telegram: 'CLAY-MUD IS SUBURBAN OR FURTHER. NOT REFORM CLUB. WHERE? - SH',
     options: [
       {

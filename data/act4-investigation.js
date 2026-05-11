@@ -24,7 +24,7 @@ export const HOTSPOTS = [
     label: '1',
     x: 22, y: 35,
     title: 'The Yale lock — front door',
-    summary: 'A modern Yale lock. The key is in the socket on the inside, with the door bolted. The door was found locked from within when the steward forced it.',
+    summary: 'A modern Yale lock. The key is in the socket on the <span class="keyword">inside</span>, with the door bolted. The door was found <span class="keyword">locked from within</span> when the steward forced it.',
     casebook: 'Front door: Yale lock with key in inside socket; bolted. Locked from within when the body was discovered.'
   },
   {
@@ -32,7 +32,7 @@ export const HOTSPOTS = [
     label: '2',
     x: 75, y: 28,
     title: 'The single window',
-    summary: 'A tall sash window. Closer inspection shows multiple coats of paint sealing the frame to the sill — the window has not been opened in years and cannot now be opened without splitting the wood. Only daylight passes here.',
+    summary: 'A tall sash window. Closer inspection shows <span class="keyword">multiple coats of paint sealing the frame to the sill</span> — the window <span class="keyword">cannot now be opened without splitting the wood</span>. Only daylight passes here.',
     casebook: 'The window is painted shut and has been for years. Not a means of entry or exit.'
   },
   {
@@ -40,7 +40,7 @@ export const HOTSPOTS = [
     label: '3',
     x: 38, y: 55,
     title: 'A tipped brandy decanter',
-    summary: 'A heavy crystal decanter on its side, contents pooling beneath. The pool runs UPHILL to a slight tilt in the rug — it was tipped recently. One glass on the side-table is half full; another has been knocked off and lies whole on the carpet.',
+    summary: 'A heavy crystal decanter on its side, contents pooling beneath. The pool runs UPHILL to a slight tilt in the rug — it was tipped recently. <span class="keyword">One glass on the side-table is half full; another has been knocked off</span> and lies whole on the carpet.',
     casebook: 'Two brandy glasses. One half-full on the table; the other knocked over but unbroken. The decanter was tipped during a struggle or altercation.'
   },
   {
@@ -48,7 +48,7 @@ export const HOTSPOTS = [
     label: '4',
     x: 50, y: 70,
     title: 'A service revolver',
-    summary: 'Webley Mk II, .455 calibre. Discharged once, the cartridge in the chamber. The serial matches Captain Whitcombe\u0027s issue. The grip carries his initials. Mud on the heel — the same pale clay as the pocket-watch chain.',
+    summary: 'Webley Mk II, .455 calibre. Discharged once, the cartridge in the chamber. The <span class="keyword">serial matches Captain Whitcombe\u0027s issue</span>. The grip carries his initials. <span class="keyword">Mud on the heel — the same pale clay as the pocket-watch chain.</span>',
     casebook: 'The revolver IS the Captain\u0027s. Fired once. Same suburban clay-mud on the grip as the pocket-watch chain — links the weapon to outside-of-London earlier in the day.'
   },
   {
@@ -56,7 +56,7 @@ export const HOTSPOTS = [
     label: '5',
     x: 45, y: 58,
     title: 'The chalk outline',
-    summary: 'The body lay face-up beside the leather club-chair, three feet from the revolver. The wound was a single shot, mid-chest, fired from approximately six feet away — too far for the Captain\u0027s position behind the chair, where the steward says he was found. The angle of the wound suggests the shot came from the direction of the back-stair door, not the fireplace.',
+    summary: 'The body lay face-up beside the leather club-chair, three feet from the revolver. The wound was a single shot, mid-chest, fired from approximately six feet away — <span class="keyword">too far for the Captain\u0027s position behind the chair</span>, where the steward says he was found. <span class="keyword">The angle of the wound suggests the shot came from the direction of the back-stair door</span>, not the fireplace.',
     casebook: 'Body position vs. revolver position vs. Captain\u0027s reported standing position do NOT line up. The shot came from the direction of the back-stair door, not where the Captain was standing.'
   },
   {
@@ -64,7 +64,7 @@ export const HOTSPOTS = [
     label: '6',
     x: 12, y: 78,
     title: 'The back-stair door',
-    summary: 'A narrower service door at the rear of the room — used by the staff for laying fires and clearing trays. It has its own bolt. The bolt is HEAVILY OILED — recently, professionally — though the rest of the brass in the room is the dull green of un-cleaned fittings. The door opens silently.',
+    summary: 'A narrower service door at the rear of the room — used by the staff for laying fires and clearing trays. It has its own bolt. The bolt is <span class="keyword">HEAVILY OILED — recently, professionally</span> — though the rest of the brass in the room is the dull green of un-cleaned fittings. The door opens silently.',
     casebook: 'The back-stair door has been newly and professionally oiled — recent, deliberate. Someone wanted it to open silently. The Captain has no reason to oil this door.'
   },
   {
@@ -72,7 +72,7 @@ export const HOTSPOTS = [
     label: '7',
     x: 65, y: 80,
     title: 'A small brass object',
-    summary: 'Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a Sikh khanda symbol. Punjabi work — the kind of identifier carried by attendants of Sikh temples in the home country. Not the Captain\u0027s. Lestrade\u0027s constable did not mark it.',
+    summary: 'Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a <span class="keyword">Sikh khanda symbol</span>. <span class="keyword">Punjabi work</span> — the kind of identifier carried by attendants of Sikh temples in the home country. <span class="keyword">Not the Captain\u0027s.</span> Lestrade\u0027s constable did not mark it.',
     casebook: 'A small Sikh brass token (khanda symbol) was on the floor under the desk — Punjabi origin, NOT the Captain\u0027s. Someone of South Asian origin, almost certainly Sikh, has been in this room.'
   },
   {
@@ -80,7 +80,7 @@ export const HOTSPOTS = [
     label: '8',
     x: 30, y: 80,
     title: 'Footprint traces by the back-stair',
-    summary: 'On the corner of the rug nearest the back-stair: a partial footprint in pale clay-mud. Same colour and grain as the Captain\u0027s pocket-watch chain. The print is small — roughly a size 7 boot, narrower than a standard British military boot. The Captain wears a size 9.',
+    summary: 'On the corner of the rug nearest the back-stair: a partial footprint in pale clay-mud. Same colour and grain as the Captain\u0027s pocket-watch chain. The print is small — <span class="keyword">roughly a size 7 boot, narrower than a standard British military boot</span>. <span class="keyword">The Captain wears a size 9.</span>',
     casebook: 'A small (size 7), narrow boot-print in clay mud near the back-stair door. The Captain wears size 9. Someone with smaller feet entered through the back-stair.'
   }
 ];
