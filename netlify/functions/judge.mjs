@@ -316,7 +316,7 @@ function buildSystem(stage) {
   return [{
     type: 'text',
     text,
-    cache_control: { type: 'ephemeral', ttl: 3600 }
+    cache_control: { type: 'ephemeral', ttl: '1h' }
   }];
 }
 
