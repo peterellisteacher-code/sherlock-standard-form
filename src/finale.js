@@ -3,11 +3,12 @@
  * Replays the case, summarises the philosophical work, prints a casebook digest.
  */
 
-import { Casebook } from './core/state.js?v=7';
-import { html, raw, escape, topbar } from './core/components.js?v=7';
-import { announce } from './core/nav.js?v=7';
+import { Casebook } from './core/state.js?v=8';
+import { html, raw, escape, topbar } from './core/components.js?v=8';
+import { announce } from './core/nav.js?v=8';
 
 export function render(root, _params) {
+  Casebook.clearStepRelevance();
   const s = Casebook.get();
   const detective = s.detectiveName || 'Detective';
   const allDone = Casebook.allComplete();

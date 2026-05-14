@@ -4,14 +4,14 @@
  * student writes a deductive argument; Holmes-AI evaluates validity + soundness.
  */
 
-import { Casebook } from '../core/state.js?v=7';
-import { judge } from '../core/ai-client.js?v=7';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=7';
-import { announce, navigate } from '../core/nav.js?v=7';
+import { Casebook } from '../core/state.js?v=8';
+import { judge } from '../core/ai-client.js?v=8';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=8';
+import { announce, navigate } from '../core/nav.js?v=8';
 import {
   ACT4_INTRO, HOTSPOTS, SUSPECTS,
   ACT4_WRITE_PROMPT, ACT4_BACK_TO_HOTSPOTS_REMINDER, ACT4_FAIL_HINT
-} from '../../data/act4-investigation.js?v=7';
+} from '../../data/act4-investigation.js?v=8';
 
 let _state = null;
 
@@ -32,7 +32,9 @@ export function render(root, _params) {
   _state = freshState();
   drawBeat(root);
 }
-export function cleanup() {}
+export function cleanup() {
+  Casebook.clearStepRelevance();
+}
 
 function drawBeat(root) {
   const m = {
@@ -48,6 +50,7 @@ function drawBeat(root) {
 /* --- INTRO ------------------------------------------------------- */
 
 function drawIntro(root) {
+  Casebook.clearStepRelevance();
   root.innerHTML = html`
     ${raw(topbar({ act: 4, name: 'The Final Deduction', progress: 'The Reform Club' }))}
 
@@ -252,6 +255,15 @@ function drawAccuse(root) {
 
 function drawWrite(root) {
   const suspect = SUSPECTS.find(s => s.id === _state.accusedSuspect);
+
+  // The final deductive argument needs the full case file: Act I evidence,
+  // all Mycroft intel earned, and the hotspot findings from THIS act.
+  Casebook.setStepRelevance({
+    stepLabel: 'Holmes — your deductive argument',
+    evidenceIds: ['watch', 'telegram', 'letters', 'medal', 'casefile'],
+    allowAllIntel: true,
+    allowedActs: [4]
+  });
 
   root.innerHTML = html`
     ${raw(topbar({ act: 4, name: 'The Final Deduction', progress: `Accusing: ${suspect.name}` }))}

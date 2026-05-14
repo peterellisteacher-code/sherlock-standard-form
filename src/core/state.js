@@ -22,6 +22,12 @@ const DEFAULT_STATE = {
 
 let _state = null;
 
+/* Step relevance — controls which Casebook entries are visible during a given
+ * interrogation step. NOT persisted (it's per-screen UI state, not progress).
+ * Set when a step renders, cleared on cleanup. The Casebook UI reads this and
+ * filters its entries, with a "Show all" escape hatch. */
+let _stepRelevance = null;
+
 function clone(o) { return JSON.parse(JSON.stringify(o)); }
 
 function load() {
@@ -95,17 +101,21 @@ export const Casebook = {
     });
   },
 
-  /** Add an entry to the casebook (premise unlocked, evidence found, etc). */
+  /** Add an entry to the casebook, deduping by stamp.
+   *  Re-marking an evidence item or re-attempting a Mycroft level updates the
+   *  existing entry rather than stacking a duplicate. */
   deposit(entry) {
     const s = load();
-    s.casebook.push({
-      ...entry,
-      when: entry.when || new Date().toISOString()
-    });
+    const stamped = { ...entry, when: entry.when || new Date().toISOString() };
+    const existingIdx = entry.stamp ? s.casebook.findIndex(e => e.stamp === entry.stamp) : -1;
+    if (existingIdx >= 0) {
+      s.casebook[existingIdx] = stamped;
+    } else {
+      s.casebook.push(stamped);
+    }
     // Cap the casebook to last 50 entries to keep storage bounded.
     if (s.casebook.length > 50) s.casebook = s.casebook.slice(-50);
     save();
-    // Broadcast so the Casebook UI can refresh if open.
     window.dispatchEvent(new CustomEvent('casebook:updated', { detail: entry }));
   },
 
@@ -138,7 +148,30 @@ export const Casebook = {
   allComplete() {
     const s = load();
     return [1, 2, 3, 4].every(n => s.acts[n].complete);
-  }
+  },
+
+  /** Step relevance — filter the Casebook to only items needed for the current step.
+   *  @param filter {Object|null} - { stepLabel, evidenceIds, allowedStamps, allowAllIntel?, allowedActs? }
+   *                                Pass null to clear (show everything). */
+  setStepRelevance(filter) {
+    _stepRelevance = filter ? {
+      stepLabel: filter.stepLabel || '',
+      evidenceIds: new Set(filter.evidenceIds || []),
+      allowedStamps: new Set(filter.allowedStamps || []),
+      allowAllIntel: !!filter.allowAllIntel,
+      allowedActs: new Set(filter.allowedActs || [])
+    } : null;
+    window.dispatchEvent(new CustomEvent('casebook:filter-changed'));
+  },
+
+  /** Clear step relevance (e.g. on scene cleanup). */
+  clearStepRelevance() {
+    _stepRelevance = null;
+    window.dispatchEvent(new CustomEvent('casebook:filter-changed'));
+  },
+
+  /** Read current step relevance. */
+  getStepRelevance() { return _stepRelevance; }
 };
 
 function rom(n) {

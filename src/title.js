@@ -3,8 +3,8 @@
  * Detective name capture, narrative framing, four-act picker.
  */
 
-import { Casebook } from './core/state.js?v=7';
-import { html, raw, escape, modal } from './core/components.js?v=7';
+import { Casebook } from './core/state.js?v=8';
+import { html, raw, escape, modal } from './core/components.js?v=8';
 
 const ACTS = [
   {
@@ -34,6 +34,7 @@ const ACTS = [
 ];
 
 export function render(root, _params) {
+  Casebook.clearStepRelevance();
   const s = Casebook.get();
   const detective = s.detectiveName;
   const visited = s.lastVisited;

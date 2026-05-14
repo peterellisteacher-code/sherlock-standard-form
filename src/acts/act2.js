@@ -7,11 +7,11 @@
  * structured JSON.
  */
 
-import { Casebook } from '../core/state.js?v=7';
-import { judge } from '../core/ai-client.js?v=7';
-import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=7';
-import { announce } from '../core/nav.js?v=7';
-import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=7';
+import { Casebook } from '../core/state.js?v=8';
+import { judge } from '../core/ai-client.js?v=8';
+import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=8';
+import { announce } from '../core/nav.js?v=8';
+import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=8';
 
 let _state = null;
 
@@ -33,7 +33,9 @@ export function render(root, _params) {
   drawBeat(root);
 }
 
-export function cleanup() {}
+export function cleanup() {
+  Casebook.clearStepRelevance();
+}
 
 function drawBeat(root) {
   if (_state.beat === 'intro')  return drawIntro(root);
@@ -44,6 +46,7 @@ function drawBeat(root) {
 /* --- INTRO ------------------------------------------------------- */
 
 function drawIntro(root) {
+  Casebook.clearStepRelevance();
   root.innerHTML = html`
     ${raw(topbar({ act: 2, name: 'Convince Mycroft', progress: 'The Strangers\u0027 Room' }))}
 
@@ -77,6 +80,14 @@ function drawIntro(root) {
 function drawLevel(root) {
   const level = MYCROFT_LEVELS[_state.levelIdx];
   const totalLevels = MYCROFT_LEVELS.length;
+
+  // Filter the Casebook to only the evidence Mycroft is actually asking about
+  // at THIS level. Cleared on Act II cleanup or replaced on next level draw.
+  Casebook.setStepRelevance({
+    stepLabel: `Mycroft, Level ${level.n}`,
+    evidenceIds: level.relevantEvidence || [],
+    allowAllIntel: true
+  });
 
   root.innerHTML = html`
     ${raw(topbar({ act: 2, name: 'Convince Mycroft', progress: `Level ${_state.levelIdx + 1} of ${totalLevels}` }))}
@@ -308,6 +319,7 @@ async function onSubmit(root, level) {
 /* --- OUTRO ------------------------------------------------------- */
 
 function drawOutro(root) {
+  Casebook.clearStepRelevance();
   Casebook.completeAct(2, {
     mycroftLevel: 4,
     badgesEarned: ['Foreign Office Operational Briefing'],
