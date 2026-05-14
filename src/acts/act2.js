@@ -7,11 +7,11 @@
  * structured JSON.
  */
 
-import { Casebook } from '../core/state.js?v=5';
-import { judge } from '../core/ai-client.js?v=5';
-import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=5';
-import { announce } from '../core/nav.js?v=5';
-import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=5';
+import { Casebook } from '../core/state.js?v=7';
+import { judge } from '../core/ai-client.js?v=7';
+import { html, raw, escape, speech, topbar, toast, modal, shelf } from '../core/components.js?v=7';
+import { announce } from '../core/nav.js?v=7';
+import { ACT2_INTRO, MYCROFT_LEVELS, ACT2_OUTRO } from '../../data/act2-mycroft.js?v=7';
 
 let _state = null;
 
@@ -136,12 +136,13 @@ function drawLevel(root) {
           <div class="shelf">
             <h4>Standard-form reminder</h4>
             <ul>
-              <li>Number every premise: <strong>P1</strong>, <strong>P2</strong>, …</li>
-              <li>Mark the conclusion: <strong>∴ C</strong> (or "Therefore,").</li>
-              <li>Inductive ⇒ "probably," not "certainly."</li>
-              <li>Each premise should be a <strong>distinct</strong> reason.</li>
-              <li>Cogency = strength + plausibly TRUE premises.</li>
+              <li>Number each premise: <strong>P1</strong>, <strong>P2</strong>, …</li>
+              <li>Mark the conclusion: <strong>∴ C</strong> or "Therefore,".</li>
+              <li>Inductive: "probably," not "certainly."</li>
+              <li>Each premise = a distinct reason.</li>
+              <li>Cogent = strong + plausibly true premises.</li>
             </ul>
+            <p style="margin-top: var(--s-2); font-size: 13px; color: var(--chalk-mute); font-style: italic;">Stuck? Hit 💡 Hints (bottom right).</p>
           </div>
 
           ${_state.intelligenceLog.length > 0 ? html`

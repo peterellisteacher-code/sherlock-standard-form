@@ -10,86 +10,106 @@
  *   3. outro — closing narrative; the marked evidence is in the Casebook for Acts II/III/IV
  */
 
-import { Casebook } from '../core/state.js?v=5';
-import { html, raw, escape, toast } from '../core/components.js?v=5';
-import { announce, navigate } from '../core/nav.js?v=5';
+import { Casebook } from '../core/state.js?v=7';
+import { html, raw, escape, toast } from '../core/components.js?v=7';
+import { announce, navigate } from '../core/nav.js?v=7';
 
-/* ===== Evidence definitions ===== */
+/* ===== Evidence definitions =====
+ *
+ * Each item has a `theme` — the case-thread it touches. Themes guide the
+ * student about WHAT to look for. The six themes map to the four "What to
+ * look for" prompts shown in the side panel.
+ */
 
 const EVIDENCE = [
   {
     id: 'watch',
     title: "A gentleman's pocket-watch",
+    theme: 'Time & whereabouts',
     sprite: '/assets/pixel/item-watch.png',
     x: 0.78, y: 0.74,
-    examine: `Half-hunter case, gold. Open in your hand it shows the dial stopped at <strong>11:14</strong>. A single sharp crack runs diagonally across the glass; the chain is smeared with pale clay mud — suburban soil, not central London. Inside the case, three letters: <strong>J · T · W</strong>. The Captain's name is James — his sister might know the middle initial.`,
-    relevant: "Stopped at 11:14 (body found at 11:30 — sixteen-minute gap). Clay mud on the chain suggests the watch was outdoors hours before the murder, but the Captain claims he was at the Club all evening. JTW monogram needs Mrs Whitcombe to confirm.",
+    examine: `Half-hunter, gold. Dial stopped at <span class="case-clue">11:14</span>. Glass cracked diagonally. The chain carries <span class="case-clue">pale clay mud</span> — suburban soil, not London. Inside the case, three letters: <span class="case-clue">J · T · W</span>.`,
+    relevant: "Stopped at 11:14. Body found at 11:30 — a sixteen-minute gap. Mud on the chain puts the watch outside London earlier, against the Captain's claim he was at the Club all evening.",
     discardWhy: 'A scratched watch on its own proves little.'
   },
   {
     id: 'telegram',
     title: 'A folded telegram',
+    theme: 'Identity of visitor',
     sprite: '/assets/pixel/item-telegram.png',
     x: 0.88, y: 0.66,
-    examine: `Yellow post-office paper, the wax seal broken once already. Inside, eight words: <em>"He arrives the eight-fifteen. Be ready."</em> Mrs Whitcombe says James received this an hour before the murder. She cannot account for it.`,
-    relevant: "A telegram an hour before the killing: 'He arrives the eight-fifteen. Be ready.' Mrs Whitcombe cannot explain it. The phrasing is unusual for trade.",
+    examine: `Yellow post-office paper, seal already broken. Eight words: <em><span class="case-clue">"He arrives the eight-fifteen. Be ready."</span></em> James received it <span class="case-clue">an hour before the murder</span>. Mrs Whitcombe cannot account for it.`,
+    relevant: "Hour before the killing: \"He arrives the eight-fifteen. Be ready.\" Phrasing is wrong for trade. Mrs Whitcombe cannot explain it.",
     discardWhy: 'A telegram with no clear sender is hard to use.'
   },
   {
     id: 'rose',
     title: 'A pressed dried rose',
+    theme: 'Personal',
     sprite: '/assets/pixel/item-rose.png',
     x: 0.32, y: 0.50,
-    examine: `Between two yellowed pages: a single rose, dark crimson fading to brown, withered but preserved with care. The pages it sits between are blank — kept only for the rose. Mrs Whitcombe will not say from whom.`,
-    relevant: 'A pressed rose, kept with deliberate care between blank pages. Mrs Whitcombe declines to say from whom. Possibly significant; possibly purely personal.',
+    examine: `Between two yellowed pages: a dark crimson rose, preserved with care. The pages are blank, kept only for the rose. Mrs Whitcombe will not say from whom.`,
+    relevant: 'A pressed rose, kept with care. Mrs Whitcombe declines to say from whom. Possibly personal, possibly not.',
     discardWhy: 'A rose is sentimental, not evidential.'
   },
   {
     id: 'letters',
     title: 'Three letters tied with ribbon',
+    theme: 'Motive (blackmail)',
     sprite: '/assets/pixel/item-letters.png',
     x: 0.16, y: 0.62,
-    examine: `Three letters from Sir Arthur Pelham to Captain Whitcombe, sent over the months preceding the murder. The third — sealed differently — opens with: <em>"James, my patience is at its end. If we cannot resolve our accounts in private, we shall do so very publicly indeed. I shall be at the Club Wednesday."</em>`,
-    relevant: "Three letters from Pelham to the Captain. The third is explicitly threatening: 'we shall resolve our accounts … very publicly indeed.' Pelham held something over him.",
+    examine: `Three letters from Pelham to the Captain over recent months. The third, sealed differently: <em>"James, <span class="case-clue">my patience is at its end</span>. If we cannot resolve our accounts in private, we shall do so <span class="case-clue">very publicly indeed</span>. I shall be at the Club Wednesday."</em>`,
+    relevant: "Three letters. The third threatens public exposure: \"resolve our accounts … very publicly.\" Pelham held something over the Captain.",
     discardWhy: 'Old correspondence between business partners.'
   },
   {
     id: 'medal',
     title: "The Captain's service medal",
+    theme: 'What Pelham knew',
     sprite: '/assets/pixel/item-medal.png',
     x: 0.42, y: 0.16,
-    examine: `Bronze, octagonal, the Indian Service Medal — awarded for service in the colonial campaigns. The ribbon is faded crimson with two green stripes. Mrs Whitcombe says they would not let him wear it home from prison; she has kept it for him. The reverse is inscribed: <em>"For Multan, 1893."</em>`,
-    relevant: "The Captain's service medal: 'For Multan, 1893.' Whatever happened at Multan, Pelham knew. Mrs Whitcombe confirms it was the leverage in their business dispute.",
+    examine: `Indian Service Medal, bronze octagon. Faded crimson ribbon. The prison would not let him wear it; his sister has kept it for him. The reverse is inscribed: <em><span class="case-clue">"For Multan, 1893."</span></em>`,
+    relevant: "Inscribed \"For Multan, 1893.\" Whatever happened there, Pelham knew. His sister says it was the lever Pelham had on him.",
     discardWhy: 'A medal is decoration, not evidence.'
   },
   {
     id: 'casefile',
     title: 'The leather case-file',
+    theme: 'State of mind',
     sprite: '/assets/pixel/item-casefile.png',
     x: 0.62, y: 0.78,
-    examine: `Mrs Whitcombe's portfolio. Inside: the inquest report, the Captain's public service record from Horse Guards, and — at the back, paper-clipped — a discharge note from the regimental surgeon at Aldershot. The note is brief: <em>"Capt. J. T. Whitcombe, 23rd Foot. Returned from Punjab with prolonged fever. Marked episodes of fugue and confessional disorientation. Recommend cautious return to civil life."</em>`,
-    relevant: "The Captain's discharge note from Aldershot: 'Marked episodes of fugue and confessional disorientation.' His confession to the murder may not be a reliable record of fact.",
+    examine: `Mrs Whitcombe's portfolio: inquest report, public service record, and at the back a discharge note from the Aldershot regimental surgeon: <em>"Capt. J. T. Whitcombe, 23rd Foot. Returned from Punjab with prolonged fever. <span class="case-clue">Marked episodes of fugue and confessional disorientation.</span>"</em>`,
+    relevant: "Aldershot discharge: \"fugue and confessional disorientation.\" His confession may not be a reliable record of fact.",
     discardWhy: 'Service records are public — Mycroft will have his own.'
   }
+];
+
+/* ===== Case threads — shown as a "What to look for" card ===== */
+
+const CASE_THREADS = [
+  { name: 'Time & whereabouts', hint: 'When did things happen? Was the Captain where he claimed?' },
+  { name: 'Motive', hint: 'Why might someone want Pelham dead? What was Pelham holding over the Captain?' },
+  { name: 'Who else was here?', hint: 'Was the Captain alone? Who else might have come to the Club?' },
+  { name: 'State of mind', hint: 'Can the confession be trusted as a record of what happened?' }
 ];
 
 /* ===== Mrs Whitcombe dialogue ===== */
 
 const WHITCOMBE_LINES = [
-  `<em>"My name is Eleanor Whitcombe. My brother is Captain James Whitcombe of the 23rd Foot. Three days ago he was arrested at the Reform Club for the murder of his business partner, Sir Arthur Pelham. He has confessed. He is to be hanged on Saturday."</em>`,
-  `<em>"I do not believe he did it. I have ridden the night train from Edinburgh to say so to the only man in England who might listen. Mr Holmes is — I see — not here. So I shall have to settle for you."</em>`,
-  `<em>"I have brought everything I could find. His pocket-watch, the telegram he received that night, three letters from Sir Arthur, his service medal — and his discharge papers, which the army did not want printed. Examine what you will. I shall answer what I can."</em>`,
-  `<em>"You may also ask me directly — click my portrait whenever you wish to speak. But first, look at what is on the desk and the mantel. The room is in the same state it was the night he was taken."</em>`
+  `<em>"Eleanor Whitcombe. My brother is Captain James Whitcombe, 23rd Foot. Three days ago he was arrested at the Reform Club for the murder of Sir Arthur Pelham. He has confessed. He hangs on Saturday."</em>`,
+  `<em>"I do not believe he did it. I have ridden the night train from Edinburgh to say so. Mr Holmes is not here. So I shall settle for you."</em>`,
+  `<em>"I have brought what I could find. His watch, the telegram, three letters from Sir Arthur, his service medal, his discharge papers. Examine what you will. I shall answer what I can."</em>`,
+  `<em>"Click my portrait when you wish to speak. First, look at the desk and the mantel. The room stands as it did the night he was taken."</em>`
 ];
 
 const WHITCOMBE_TOPICS = [
-  { triggerEvidence: 'watch', line: `<em>"His middle name was Theodore — yes, the monogram is his. Father gave him the watch when he came of age. He wound it every morning without fail; if it stopped at 11:14, something stopped it. He would not have let the spring run down — not on the night of his arrest."</em>` },
-  { triggerEvidence: 'telegram', line: `<em>"That telegram. It came an hour before the murder. He read it twice, asked for his coat, and went out. He has not, in three days, said one word about it. I suspect it is the heart of the matter."</em>` },
+  { triggerEvidence: 'watch', line: `<em>"Theodore — yes, the monogram is his. Father gave him the watch when he came of age. He wound it every morning. If it stopped at 11:14, something stopped it. He would not have let the spring run down."</em>` },
+  { triggerEvidence: 'telegram', line: `<em>"An hour before the murder. He read it twice, took his coat, went out. He has not spoken of it since. I suspect it is the heart of the matter."</em>` },
   { triggerEvidence: 'rose', line: `She looks at the rose for a long moment. <em>"That is not for you, sir. With respect. There are some things that belong only to a brother and a sister."</em>` },
-  { triggerEvidence: 'letters', line: `<em>"Sir Arthur was, in life, not the gentleman his title suggested. He had been pressing James to sign over a larger share of the proceeds for over a year — and when James refused, Sir Arthur began to make threats. The third letter is the worst of them."</em>` },
-  { triggerEvidence: 'medal', line: `<em>"What happened at Multan in '93 — I do not know. James has not spoken of it. But Sir Arthur knew. James once said, ‘The man knows what happened at Multan, and I cannot have him telling it.’ I do not know what he meant, only that it was the lever Sir Arthur had on him."</em>` },
-  { triggerEvidence: 'casefile', line: `<em>"The Aldershot surgeon was kind enough to write that note. It has not been entered into the official record — were it, James's pension would be reduced and his name attached to a humiliation. I am told I should not even be in possession of it. But I am his sister. And his confession reads like one of his fugues."</em>` },
-  { isClose: true, line: `<em>"I shall take a room at the Langham, sir. James has three days. Take to Mr Holmes whatever you think will hold a candle in his hand. The bell-pull is by the door if you require Mrs Hudson."</em>` }
+  { triggerEvidence: 'letters', line: `<em>"Sir Arthur was not the gentleman his title suggested. For a year he had pressed James to sign over a larger share. When James refused, the threats began. The third letter is the worst of them."</em>` },
+  { triggerEvidence: 'medal', line: `<em>"What happened at Multan in '93 I do not know. James has not spoken of it. Sir Arthur knew. James once said, ‘The man knows what happened at Multan, and I cannot have him telling it.’ That was the lever Sir Arthur had on him."</em>` },
+  { triggerEvidence: 'casefile', line: `<em>"The Aldershot surgeon was kind enough to write that note. It is not in the official record — were it, James would lose his pension. I should not even have it. But I am his sister. And his confession reads like one of his fugues."</em>` },
+  { isClose: true, line: `<em>"I shall take a room at the Langham. James has three days. Take to Mr Holmes whatever you think will hold a candle. The bell-pull is by the door for Mrs Hudson."</em>` }
 ];
 
 /* ===== State ===== */
@@ -152,10 +172,10 @@ function drawOpening(root) {
       </header>
 
       <div class="parchment stack-tight" style="font-size: var(--type-md); line-height: 1.6;">
-        <p>Holmes is at the docks. He left a note. <em>"Investigating the matter of the Romanian shipping clerk. Back by Thursday morning. Do not eat my anchovies."</em></p>
-        <p>You are at the desk, attempting Watson's memoir of the Reichenbach business. The fire is low. The fog has come up from the river and pressed itself against the parlour windows like a poorly-mannered acquaintance. The clock above the mantel reads thirteen minutes to midnight.</p>
-        <p>Three knocks. Loud. Then a fourth, almost immediately, as though by someone who could not bear to wait between knocks.</p>
-        <p>You open the door. A woman in deep mourning, soaked through, presses past you into the hallway. She speaks first, in the kind of voice that brooks no condolences.</p>
+        <p>Holmes is at the docks. He left a note: <em>"Investigating the Romanian shipping clerk. Back Thursday. Do not eat my anchovies."</em></p>
+        <p>You are at the desk over Watson's memoir of Reichenbach. The fire is low. Fog presses at the windows. The clock reads thirteen minutes to midnight.</p>
+        <p>Three knocks. Loud. Then a fourth, hard on the third.</p>
+        <p>You open the door. A woman in deep mourning presses past you into the hallway, soaked through, and speaks first.</p>
         <p><em>"My brother is to be hanged on Saturday. I do not believe he did it. I have brought everything I could find. May we begin?"</em></p>
       </div>
 
@@ -187,10 +207,10 @@ function drawParlour(root) {
     </div>
 
     <div id="parlour-stage" style="position: relative; width: 100%; padding: var(--s-3);">
-      <div style="display: grid; grid-template-columns: 1fr 400px; gap: var(--s-3); align-items: start; max-width: 1760px; margin: 0 auto;">
+      <div class="parlour-grid">
 
-        <div style="position: relative;">
-          <div id="parlour-phaser" style="width: 100%; max-width: 1280px; aspect-ratio: 384 / 224; background: #0B0D14; border: 1px solid var(--brass); border-radius: var(--radius-md); overflow: hidden; image-rendering: pixelated;"></div>
+        <div style="position: relative; min-width: 0;">
+          <div id="parlour-phaser" style="width: 100%; max-width: 960px; aspect-ratio: 384 / 224; background: #0B0D14; border: 1px solid var(--brass); border-radius: var(--radius-md); overflow: hidden; image-rendering: pixelated; margin: 0 auto;"></div>
 
           <div id="speech-overlay" style="position: relative; margin-top: var(--s-2); background: rgba(20, 23, 31, 0.95); border: 1px solid var(--brass); border-radius: var(--radius-md); padding: var(--s-3); display: none; gap: var(--s-3); align-items: flex-start; box-shadow: var(--shadow-card);">
             <img id="speech-portrait" src="/assets/pixel/whitcombe-portrait.png" alt="Mrs Eleanor Whitcombe" style="width: 80px; height: 107px; image-rendering: pixelated; border: 1px solid var(--brass); border-radius: var(--radius-sm); flex-shrink: 0;" />
@@ -205,18 +225,27 @@ function drawParlour(root) {
         </div>
 
         <aside class="stack" id="casebook-side">
+          <!-- "What to look for" — orients students before they start clicking. -->
+          <div class="case-themes">
+            <h4>What to look for</h4>
+            <ul>
+              ${CASE_THREADS.map(t => `<li><strong>${escape(t.name)}.</strong> ${escape(t.hint)}</li>`).join('')}
+            </ul>
+          </div>
+
           <!-- Keyboard-accessible evidence list (parallel to the Phaser sprite hotspots).
                Real <button>s so Tab reaches every evidence item without needing the mouse. -->
           <div class="panel">
             <h4 style="font-style: italic; color: var(--brass-soft); margin-bottom: var(--s-2);">Evidence in the parlour</h4>
-            <p style="color: var(--chalk-mute); font-size: 13px; margin-bottom: var(--s-2); font-style: italic;">Click any glowing item in the scene, OR pick from this list. The list is identical.</p>
+            <p style="color: var(--chalk-mute); font-size: 13px; margin-bottom: var(--s-2); font-style: italic;">Click any glowing item in the scene, or pick from this list.</p>
             <ul id="evidence-keyboard-list" role="list" style="list-style: none; padding: 0; margin: 0;">
               ${EVIDENCE.map(e => `
-                <li style="margin-bottom: 6px;">
-                  <button class="btn btn-secondary evidence-row-btn" data-evidence="${e.id}" style="width: 100%; text-align: left; justify-content: flex-start; padding: 8px 12px; min-height: 0; font-size: 14px; gap: 8px;">
+                <li style="margin-bottom: 8px;">
+                  <button class="btn btn-secondary evidence-row-btn" data-evidence="${e.id}" style="width: 100%; text-align: left; justify-content: flex-start; padding: 8px 12px; min-height: 0; font-size: 14px; gap: 8px; flex-wrap: wrap;">
                     <img src="${e.sprite}" alt="" aria-hidden="true" style="width: 24px; height: 24px; image-rendering: pixelated; flex-shrink: 0;" />
                     <span style="flex: 1;">${escape(e.title)}</span>
                     <span class="evidence-status" data-status-for="${e.id}" style="font-size: 11px; color: var(--chalk-mute); font-family: var(--font-evidence); letter-spacing: 0.08em;">unexamined</span>
+                    <span class="theme-tag" style="flex-basis: 100%; margin-left: 32px;">${escape(e.theme)}</span>
                   </button>
                 </li>
               `).join('')}
@@ -241,7 +270,8 @@ function drawParlour(root) {
           </div>
 
           <div class="panel" style="text-align: center;">
-            <p style="color: var(--chalk-mute); font-size: 13px; margin-bottom: var(--s-2); font-style: italic;">Submit to Holmes when you have <strong>four or more</strong> pieces of evidence marked.</p>
+            <p style="color: var(--chalk-mute); font-size: 13px; margin-bottom: var(--s-1); font-style: italic;">Mark <strong>four or more</strong> pieces of evidence to submit.</p>
+            <p style="color: var(--chalk-mute); font-size: 12px; margin-bottom: var(--s-2); font-style: italic;">Click any set-aside item to reconsider it.</p>
             <button class="btn btn-large" id="submit-evidence" disabled>Submit to Holmes →</button>
           </div>
         </aside>
@@ -477,6 +507,7 @@ function examineItem(ev) {
     </div>
   `;
   document.body.appendChild(backdrop);
+  document.body.classList.add('modal-open');
 
   _state.evidence[ev.id].examined = true;
   updateCounter();
@@ -500,14 +531,13 @@ function examineItem(ev) {
     backdrop.removeEventListener('keydown', trap);
     document.removeEventListener('keydown', escHandler);
     backdrop.remove();
-    // Restore focus to the element that opened the modal (sprite click won't have a focusable target,
-    // but DOM-button-triggered openings will). Fall back to the corresponding keyboard-list row.
-    if (opener && document.body.contains(opener) && typeof opener.focus === 'function') {
-      opener.focus();
-    } else {
-      const row = document.querySelector(`.evidence-row-btn[data-evidence="${ev.id}"]`);
-      row?.focus();
-    }
+    if (!document.querySelector('.modal-backdrop')) document.body.classList.remove('modal-open');
+    // Restore focus to the element that opened the modal. The opener is sometimes <body> (Phaser
+    // sprite clicks don't focus a DOM element) — fall back to the matching evidence row button.
+    const target = (opener && opener !== document.body && document.body.contains(opener) && typeof opener.focus === 'function')
+      ? opener
+      : document.querySelector(`.evidence-row-btn[data-evidence="${ev.id}"]`);
+    setTimeout(() => target?.focus(), 0);
   };
 
   backdrop.querySelector('#examine-close').addEventListener('click', closeModal);
@@ -687,12 +717,12 @@ function closeAct1(root) {
       <h1 style="font-style: italic;">The case is in your hands.</h1>
 
       <div class="parchment stack-tight" style="text-align: left;">
-        <p>She gathers her gloves. <em>"I shall take a room at the Langham. James has three days. Take to Mr Holmes whatever you think will hold a candle in his hand."</em></p>
+        <p>She gathers her gloves. <em>"I shall take a room at the Langham. James has three days. Take to Mr Holmes whatever you think will hold a candle."</em></p>
         <p>You have marked <strong>${marked.length}</strong> ${marked.length === 1 ? 'item' : 'items'} for the case:</p>
         <ul style="margin-left: var(--s-4); margin-top: var(--s-2);">
           ${marked.map(e => `<li style="margin-bottom: 6px;"><strong>${escape(e.title)}.</strong> ${e.relevant}</li>`).join('')}
         </ul>
-        <p style="margin-top: var(--s-3); font-style: italic;">There is, as Holmes has it, exactly one person in London who can place these items in their proper political setting. He is at the Diogenes Club. He does not part with secrets cheaply.</p>
+        <p style="margin-top: var(--s-3); font-style: italic;">One man in London can place these items in their political setting. He is at the Diogenes Club. He does not part with secrets cheaply.</p>
       </div>
 
       <div class="row" style="justify-content: center; gap: var(--s-2);">

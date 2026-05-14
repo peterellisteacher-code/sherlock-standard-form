@@ -4,14 +4,14 @@
  * student writes a deductive argument; Holmes-AI evaluates validity + soundness.
  */
 
-import { Casebook } from '../core/state.js?v=5';
-import { judge } from '../core/ai-client.js?v=5';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=5';
-import { announce, navigate } from '../core/nav.js?v=5';
+import { Casebook } from '../core/state.js?v=7';
+import { judge } from '../core/ai-client.js?v=7';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=7';
+import { announce, navigate } from '../core/nav.js?v=7';
 import {
   ACT4_INTRO, HOTSPOTS, SUSPECTS,
   ACT4_WRITE_PROMPT, ACT4_BACK_TO_HOTSPOTS_REMINDER, ACT4_FAIL_HINT
-} from '../../data/act4-investigation.js?v=5';
+} from '../../data/act4-investigation.js?v=7';
 
 let _state = null;
 
@@ -103,6 +103,16 @@ function drawScene(root) {
         </div>
 
         <aside class="stack">
+          <div class="case-themes">
+            <h4>Four things to settle</h4>
+            <ul>
+              <li><strong>How did the killer get in and out?</strong></li>
+              <li><strong>Was the Captain alone with Pelham?</strong></li>
+              <li><strong>Where did the shot come from?</strong></li>
+              <li><strong>Who else was in the room?</strong></li>
+            </ul>
+          </div>
+
           <div class="shelf">
             <h4>Findings</h4>
             ${_state.findings.length === 0 ? html`
@@ -205,6 +215,7 @@ function drawAccuse(root) {
       <header class="stack-tight">
         <h2 style="font-style: italic;">Whom do you accuse?</h2>
         <p style="color: var(--chalk-mute);">A deductive argument is only as good as its premises. Pick the suspect whose case the evidence actually supports.</p>
+        <p style="color: var(--chalk-mute); font-size: 14px; font-style: italic;">Each card has a theme — what an argument against them rests on.</p>
       </header>
 
       <div class="suspect-grid">
@@ -280,10 +291,11 @@ P4: ...
           <div class="shelf">
             <h4>Holmes will check</h4>
             <ul>
-              <li><strong>Validity</strong> — if the premises are all true, does the conclusion follow with certainty?</li>
+              <li><strong>Validity</strong> — if every premise is true, must the conclusion follow?</li>
               <li><strong>Soundness</strong> — are the premises actually true given the evidence we\u0027ve gathered?</li>
             </ul>
-            <p style="font-style: italic; margin-top: var(--s-2); font-size: 14px;">A valid argument with even ONE false premise is unsound. Both must hold.</p>
+            <p style="font-style: italic; margin-top: var(--s-2); font-size: 14px;">A valid argument with one false premise is unsound. Both must hold.</p>
+            <p style="margin-top: var(--s-1); font-size: 13px; color: var(--chalk-mute); font-style: italic;">Stuck? Hit 💡 Hints (bottom right).</p>
           </div>
 
           <div class="shelf">

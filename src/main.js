@@ -2,15 +2,16 @@
  * Entry point. Registers all scenes, mounts global UI (Casebook), starts router.
  */
 
-import { registerScene, start } from './core/nav.js?v=5';
-import { mountCasebook } from './casebook.js?v=5';
+import { registerScene, start } from './core/nav.js?v=7';
+import { mountCasebook } from './casebook.js?v=7';
+import { mountHints } from './hints.js?v=7';
 
-import * as titleScene from './title.js?v=5';
-import * as act1Scene from './acts/act1.js?v=5';
-import * as act2Scene from './acts/act2.js?v=5';
-import * as act3Scene from './acts/act3.js?v=5';
-import * as act4Scene from './acts/act4.js?v=5';
-import * as finaleScene from './finale.js?v=5';
+import * as titleScene from './title.js?v=7';
+import * as act1Scene from './acts/act1.js?v=7';
+import * as act2Scene from './acts/act2.js?v=7';
+import * as act3Scene from './acts/act3.js?v=7';
+import * as act4Scene from './acts/act4.js?v=7';
+import * as finaleScene from './finale.js?v=7';
 
 registerScene('/title', titleScene);
 registerScene('/act/1', act1Scene);
@@ -20,4 +21,5 @@ registerScene('/act/4', act4Scene);
 registerScene('/finale', finaleScene);
 
 mountCasebook();
+mountHints();
 start();

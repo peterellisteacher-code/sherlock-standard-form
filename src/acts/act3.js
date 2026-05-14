@@ -11,15 +11,15 @@
  * One AI call per student (the Sapolsky rebut).
  */
 
-import { Casebook } from '../core/state.js?v=5';
-import { judge } from '../core/ai-client.js?v=5';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=5';
-import { announce } from '../core/nav.js?v=5';
+import { Casebook } from '../core/state.js?v=7';
+import { judge } from '../core/ai-client.js?v=7';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=7';
+import { announce } from '../core/nav.js?v=7';
 import {
   ACT3_INTRO, SAPOLSKY_LETTER, STANDARD_FORM_OPTIONS,
   LESTRADE_OBJECTION, PREMISE_OPTIONS,
   STUDENT_WRITES_PROMPT, ACT3_OUTRO, SAPOLSKY_PROPOSITION
-} from '../../data/act3-sapolsky.js?v=5';
+} from '../../data/act3-sapolsky.js?v=7';
 
 let _state = null;
 
@@ -102,7 +102,7 @@ function drawLetter(root) {
         <div class="stack">
           <div class="parchment">
             <h4 style="color: var(--oxblood); font-style: italic; margin-bottom: var(--s-2);">Your task</h4>
-            <p>Three candidate renderings of Sapolsky\u0027s argument in standard form. <strong>Pick the one that is most faithful to his actual reasoning.</strong></p>
+            <p>Three candidate renderings of Sapolsky\u0027s argument. <strong>Pick the one most faithful to his reasoning.</strong> The highlighted lines in the letter are his three premises.</p>
           </div>
 
           <div class="stack-tight" id="sf-options">
@@ -168,7 +168,7 @@ function drawObjection(root) {
 
       <div class="parchment">
         <h4 style="color: var(--oxblood); font-style: italic; margin-bottom: var(--s-2);">Your task</h4>
-        <p>Lestrade is attacking <strong>one specific premise</strong> of Sapolsky\u0027s argument. Identify which one.</p>
+        <p>Lestrade is attacking <strong>one premise</strong> of Sapolsky\u0027s argument. Identify which one.</p>
       </div>
 
       <div class="stack-tight" id="premise-options">
@@ -260,16 +260,17 @@ P3: ...
           <div class="shelf">
             <h4>What Sapolsky will check</h4>
             <ul>
-              <li>Is your conclusion clearly marked?</li>
-              <li>Are your premises distinct and supportable?</li>
-              <li>Does the inductive bridge from premises to conclusion actually carry weight?</li>
+              <li>Conclusion clearly marked.</li>
+              <li>Premises distinct and supportable.</li>
+              <li>Inductive bridge from premises to conclusion bears weight.</li>
               <li>He will challenge ONE premise. Be ready to defend it.</li>
             </ul>
           </div>
 
           <div class="shelf">
             <h4>Hint</h4>
-            <p style="font-size: 14px;">A premise like "the brain causes everything" is hard to defend without saying more. A premise like "fugue states involve documented impairment of memory and intent (per the Aldershot surgeon)" is easier — it cites evidence.</p>
+            <p style="font-size: 14px;">"The brain causes everything" is hard to defend on its own. "Fugue states involve documented impairment of memory and intent (per the Aldershot surgeon)" is easier — it cites evidence.</p>
+            <p style="margin-top: var(--s-1); font-size: 13px; color: var(--chalk-mute); font-style: italic;">Stuck on form? Hit 💡 Hints (bottom right).</p>
           </div>
         </aside>
       </div>

@@ -594,6 +594,87 @@ button:disabled {
 }
 .modal h2 { margin-bottom: var(--s-3); }
 
+/* === Parlour grid (Act I) — sized to fit 1366×768 classroom projectors === */
+.parlour-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: var(--s-3);
+  align-items: start;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.parlour-grid > aside {
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  position: sticky;
+  top: 80px;
+}
+@media (max-width: 1400px) {
+  .parlour-grid {
+    grid-template-columns: 1fr;
+  }
+  .parlour-grid > aside {
+    max-height: none;
+    position: static;
+  }
+}
+
+/* === Modal scroll-lock — applied while any modal is open === */
+body.modal-open { overflow: hidden; }
+
+/* === Case clue (load-bearing keyword highlight in evidence text) === */
+.case-clue {
+  background: linear-gradient(180deg, transparent 55%, rgba(184, 153, 104, 0.45) 55%);
+  font-weight: 600;
+  color: inherit;
+  padding: 0 1px;
+}
+.parchment .case-clue {
+  background: linear-gradient(180deg, transparent 55%, rgba(107, 31, 31, 0.18) 55%);
+  color: var(--oxblood);
+}
+
+/* === Theme tag (tells students which case-thread an item touches) === */
+.theme-tag {
+  display: inline-block;
+  font-family: var(--font-evidence);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass);
+  background: rgba(184, 153, 104, 0.12);
+  border: 1px solid rgba(184, 153, 104, 0.35);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-top: 2px;
+}
+
+/* === "What to look for" hint card === */
+.case-themes {
+  background: var(--ink-deep);
+  border: 1px dashed var(--brass);
+  border-radius: var(--radius-md);
+  padding: var(--s-2) var(--s-3);
+}
+.case-themes h4 {
+  font-family: var(--font-evidence);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: var(--s-1);
+}
+.case-themes ul { list-style: none; padding: 0; margin: 0; }
+.case-themes li {
+  font-size: 13px;
+  color: var(--chalk);
+  padding: 4px 0;
+  border-top: 1px solid rgba(184, 153, 104, 0.12);
+  line-height: 1.4;
+}
+.case-themes li:first-child { border-top: 0; }
+.case-themes li strong { color: var(--brass-soft); }
+
 /* === Casebook (cross-act dossier) === */
 .casebook-toggle {
   position: fixed;
@@ -601,6 +682,55 @@ button:disabled {
   right: var(--s-4);
   z-index: 60;
   font-family: var(--font-evidence);
+}
+
+/* === Hints toggle (sits beside the Casebook button) === */
+.hints-toggle {
+  position: fixed;
+  bottom: var(--s-4);
+  right: calc(var(--s-4) + 190px);
+  z-index: 60;
+  font-family: var(--font-evidence);
+}
+@media (max-width: 720px) {
+  .hints-toggle { right: var(--s-4); bottom: calc(var(--s-4) + 60px); }
+}
+.hints-tabs {
+  display: flex;
+  gap: var(--s-1);
+  margin-bottom: var(--s-3);
+  border-bottom: 1px solid rgba(184, 153, 104, 0.3);
+}
+.hints-tab {
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  color: var(--chalk-mute);
+  font-family: var(--font-evidence);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--s-2) var(--s-3);
+  cursor: pointer;
+  min-height: 0;
+  border-radius: 0;
+}
+.hints-tab:hover { color: var(--parchment); background: transparent; transform: none; box-shadow: none; }
+.hints-tab[aria-selected="true"] {
+  color: var(--brass-soft);
+  border-bottom-color: var(--brass);
+}
+.hints-example {
+  font-family: var(--font-evidence);
+  font-size: 14px;
+  line-height: 1.7;
+  background: var(--parchment);
+  color: var(--ink);
+  padding: var(--s-2) var(--s-3);
+  border-left: 4px solid var(--oxblood);
+  border-radius: var(--radius-sm);
+  margin-block: var(--s-2);
+  white-space: pre-wrap;
 }
 .casebook-panel {
   position: fixed;

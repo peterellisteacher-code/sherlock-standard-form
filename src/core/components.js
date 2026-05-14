@@ -134,6 +134,7 @@ export function modal({ heading, body, primary, onPrimary, secondary, onSecondar
   const close = () => {
     document.removeEventListener('keydown', onKey);
     backdrop.remove();
+    if (!document.querySelector('.modal-backdrop')) document.body.classList.remove('modal-open');
   };
 
   const onKey = (e) => {
@@ -154,6 +155,7 @@ export function modal({ heading, body, primary, onPrimary, secondary, onSecondar
 
   document.addEventListener('keydown', onKey);
   document.body.appendChild(backdrop);
+  document.body.classList.add('modal-open');
   // Move focus into the modal
   const auto = backdrop.querySelector('[autofocus]');
   auto?.focus();

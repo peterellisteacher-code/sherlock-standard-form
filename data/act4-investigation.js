@@ -2,19 +2,22 @@
  * Act IV — The Final Deduction.
  * Locked-room point-and-click investigation at the Reform Club.
  * Eight evidence hotspots; three suspects; final deductive argument.
+ *
+ * Each hotspot has a `theme` — the question this clue answers.
+ * Each suspect has a `theme` — what the argument against them would rest on.
  */
 
 export const ACT4_INTRO = {
   setting: 'The Reform Club, Pall Mall — Thursday, 5.15 am.',
   body: [
-    `It has stopped raining. Lestrade is in the foyer with two constables, all three
-     visibly bone-tired. He hands Sherlock the keys without a word.`,
+    `It has stopped raining. Lestrade is in the foyer with two constables, all
+     three bone-tired. He hands Sherlock the keys without a word.`,
     `<em>"You have one hour, Mr Holmes. The body has been removed; the rest is as
      found. Captain Whitcombe is in the morning room with his sister."</em>`,
     `Sherlock turns to Watson at the door of the murder room.`,
     `<em>"Eight hotspots, Watson. Examine them all. When you have read the room,
-     pick a suspect, and present your case in standard form. I shall be reading the
-     Captain\u0027s service file. The hour is yours."</em>`
+     pick a suspect and present your case in standard form. I shall be reading the
+     Captain's service file. The hour is yours."</em>`
   ]
 };
 
@@ -22,66 +25,74 @@ export const HOTSPOTS = [
   {
     id: 'lock',
     label: '1',
+    theme: 'Locked-room proof',
     x: 22, y: 35,
     title: 'The Yale lock — front door',
-    summary: 'A modern Yale lock. The key is in the socket on the inside, with the door bolted. The door was found locked from within when the steward forced it.',
-    casebook: 'Front door: Yale lock with key in inside socket; bolted. Locked from within when the body was discovered.'
+    summary: 'A modern Yale lock. The key is in the inside socket; the door bolted from within. Locked from inside when the steward forced it.',
+    casebook: '<span class="case-clue">Front door locked from within</span> when the body was found. Key in the inside socket.'
   },
   {
     id: 'window',
     label: '2',
+    theme: 'Locked-room proof',
     x: 75, y: 28,
     title: 'The single window',
-    summary: 'A tall sash window. Closer inspection shows multiple coats of paint sealing the frame to the sill — the window has not been opened in years and cannot now be opened without splitting the wood. Only daylight passes here.',
-    casebook: 'The window is painted shut and has been for years. Not a means of entry or exit.'
+    summary: 'A tall sash window. Multiple coats of paint seal the frame to the sill. The window has not been opened in years and cannot now be opened without splitting the wood.',
+    casebook: '<span class="case-clue">Window painted shut</span> and has been for years. Not a means of entry or exit.'
   },
   {
     id: 'decanter',
     label: '3',
+    theme: 'A struggle in the room',
     x: 38, y: 55,
     title: 'A tipped brandy decanter',
-    summary: 'A heavy crystal decanter on its side, contents pooling beneath. The pool runs UPHILL to a slight tilt in the rug — it was tipped recently. One glass on the side-table is half full; another has been knocked off and lies whole on the carpet.',
-    casebook: 'Two brandy glasses. One half-full on the table; the other knocked over but unbroken. The decanter was tipped during a struggle or altercation.'
+    summary: 'A heavy crystal decanter on its side, contents pooling beneath. One glass on the side-table half full; another knocked off, lying whole on the carpet.',
+    casebook: `<span class="case-clue">Two brandy glasses</span> — one half-full, one knocked over. The Captain was not Pelham's only company.`
   },
   {
     id: 'revolver',
     label: '4',
+    theme: 'Where the Captain was',
     x: 50, y: 70,
     title: 'A service revolver',
-    summary: 'Webley Mk II, .455 calibre. Discharged once, the cartridge in the chamber. The serial matches Captain Whitcombe\u0027s issue. The grip carries his initials. Mud on the heel — the same pale clay as the pocket-watch chain.',
-    casebook: 'The revolver IS the Captain\u0027s. Fired once. Same suburban clay-mud on the grip as the pocket-watch chain — links the weapon to outside-of-London earlier in the day.'
+    summary: `Webley Mk II, .455. Discharged once. Serial matches the Captain's issue. Grip carries his initials. Mud on the heel — the same <strong>pale clay</strong> as the pocket-watch chain.`,
+    casebook: `Revolver IS the Captain's. Fired once. <span class="case-clue">Same suburban clay-mud</span> on the grip as the pocket-watch chain.`
   },
   {
     id: 'outline',
     label: '5',
+    theme: 'Where the shot came from',
     x: 45, y: 58,
     title: 'The chalk outline',
-    summary: 'The body lay face-up beside the leather club-chair, three feet from the revolver. The wound was a single shot, mid-chest, fired from approximately six feet away — too far for the Captain\u0027s position behind the chair, where the steward says he was found. The angle of the wound suggests the shot came from the direction of the back-stair door, not the fireplace.',
-    casebook: 'Body position vs. revolver position vs. Captain\u0027s reported standing position do NOT line up. The shot came from the direction of the back-stair door, not where the Captain was standing.'
+    summary: 'The body lay face-up beside the leather chair, three feet from the revolver. Single shot, mid-chest, fired from about six feet. The angle suggests the shot came from the direction of the <strong>back-stair door</strong>, not the fireplace.',
+    casebook: `Body, revolver, and Captain's reported position do not line up. <span class="case-clue">Shot came from the back-stair direction</span>, not where the Captain was standing.`
   },
   {
     id: 'backstair',
     label: '6',
+    theme: 'Who else was here',
     x: 12, y: 78,
     title: 'The back-stair door',
-    summary: 'A narrower service door at the rear of the room — used by the staff for laying fires and clearing trays. It has its own bolt. The bolt is HEAVILY OILED — recently, professionally — though the rest of the brass in the room is the dull green of un-cleaned fittings. The door opens silently.',
-    casebook: 'The back-stair door has been newly and professionally oiled — recent, deliberate. Someone wanted it to open silently. The Captain has no reason to oil this door.'
+    summary: 'A narrower service door at the rear. Its bolt is <strong>heavily oiled — recent, professional</strong> — though the rest of the brass in the room is the dull green of un-cleaned fittings. The door opens silently.',
+    casebook: '<span class="case-clue">Back-stair door newly and professionally oiled</span> — recent, deliberate. Someone wanted it to open silently. The Captain has no reason to oil it.'
   },
   {
     id: 'token',
     label: '7',
+    theme: 'Who else was here',
     x: 65, y: 80,
     title: 'A small brass object',
-    summary: 'Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a Sikh khanda symbol. Punjabi work — the kind of identifier carried by attendants of Sikh temples in the home country. Not the Captain\u0027s. Lestrade\u0027s constable did not mark it.',
-    casebook: 'A small Sikh brass token (khanda symbol) was on the floor under the desk — Punjabi origin, NOT the Captain\u0027s. Someone of South Asian origin, almost certainly Sikh, has been in this room.'
+    summary: `Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a <strong>Sikh khanda</strong>. Punjabi work — the kind carried by attendants of Sikh temples. Not the Captain's.`,
+    casebook: `A <span class="case-clue">Sikh brass token (khanda)</span> under the desk. Punjabi work, NOT the Captain's. Someone of South Asian origin has been in this room.`
   },
   {
     id: 'mud',
     label: '8',
+    theme: 'Who else was here',
     x: 30, y: 80,
     title: 'Footprint traces by the back-stair',
-    summary: 'On the corner of the rug nearest the back-stair: a partial footprint in pale clay-mud. Same colour and grain as the Captain\u0027s pocket-watch chain. The print is small — roughly a size 7 boot, narrower than a standard British military boot. The Captain wears a size 9.',
-    casebook: 'A small (size 7), narrow boot-print in clay mud near the back-stair door. The Captain wears size 9. Someone with smaller feet entered through the back-stair.'
+    summary: `Partial footprint in <strong>pale clay-mud</strong> on the rug nearest the back-stair. Same colour and grain as the Captain's pocket-watch chain. The print is small — roughly <strong>size 7</strong>, narrower than a British military boot. The Captain wears size 9.`,
+    casebook: '<span class="case-clue">Size 7 narrow boot-print in clay mud</span> near the back-stair door. The Captain wears size 9. Someone with smaller feet came in by the back-stair.'
   }
 ];
 
@@ -90,40 +101,38 @@ export const SUSPECTS = [
     id: 'captain',
     name: 'Captain James Whitcombe',
     blurb: 'The confessed murderer. Found beside the body. Service revolver. Long history of fugue states.',
-    note: 'A valid-looking argument can be made for him. But valid is not sound: examine which premises hold up against ALL the evidence.'
+    note: 'A valid argument can be made for him. But valid is not sound: which premises hold up against ALL the evidence?'
   },
   {
     id: 'hari',
     name: 'Hari Singh',
-    blurb: 'Brother of Naunihal Singh, the man the Captain killed in Multan. Per Mycroft, arrived from Liverpool on the 8.15. Mentioned in the Captain\u0027s telegram.',
-    note: 'Has motive (revenge for Multan), means (taken the Captain\u0027s revolver during a fugue), opportunity (the back-stair).'
+    blurb: `Brother of Naunihal Singh, the man the Captain killed in Multan. Per Mycroft, arrived from Liverpool on the 8.15. Mentioned in the Captain's telegram.`,
+    note: `Has motive (revenge for Multan), means (the Captain's revolver), opportunity (the back-stair).`
   },
   {
     id: 'steward',
     name: 'The Reform Club Steward',
-    blurb: 'A long-serving employee. Discovered the body, broke down the door. No known motive.',
-    note: 'No motive established. No evidence of his presence at the moment of the shot. A red herring — but you might still construct an argument naming him.'
+    blurb: 'Long-serving employee. Discovered the body. Broke down the door. No known motive.',
+    note: 'No motive established. No evidence places him in the room at the shot. A red herring — but an argument naming him can still be tried.'
   }
 ];
 
-export const ACT4_WRITE_PROMPT = `Sherlock returns from the morning room with the
-Captain\u0027s service file under his arm. He looks drawn but alert.
+export const ACT4_WRITE_PROMPT = `Sherlock returns with the Captain's service
+file under his arm. He looks drawn but alert.
 <br><br>
-<em>"Lestrade has agreed to entertain a deductive argument from us. Time is short
-— Captain Whitcombe\u0027s execution is set for Saturday at six. Watson, name the
-suspect you accuse and your case in standard form. The case must be SOUND, not
-merely valid. A valid argument with one false premise will hang the wrong man, or
-free the right one, or both."</em>
+<em>"Lestrade has agreed to entertain a deductive argument. Time is short — the
+execution is set for Saturday at six. Name the suspect you accuse and your case
+in standard form. The case must be SOUND, not merely valid. A valid argument
+with one false premise will hang the wrong man."</em>
 <br><br>
-<em>"Take your time. The Reform Club\u0027s clocks are slow."</em>`;
+<em>"Take your time. The Club's clocks are slow."</em>`;
 
 export const ACT4_BACK_TO_HOTSPOTS_REMINDER = `You may revisit any of the eight
-hotspots above before submitting.`;
+hotspots before submitting.`;
 
-export const ACT4_FAIL_HINT = `Holmes wires Lestrade with the case-as-stated. He
-returns shortly with a furrowed brow.
+export const ACT4_FAIL_HINT = `Holmes wires Lestrade. He returns with a furrowed
+brow.
 <br><br>
-<em>"Lestrade is unconvinced, Watson. He says — accurately — that your argument
-has problems. Examine your premises against the evidence we have gathered. Look
-again at the room if you must. The clock above the mantel says we have time for
-one more attempt — but only one."</em>`;
+<em>"Lestrade is unconvinced, Watson. Your argument has problems. Examine your
+premises against the evidence. Look again at the room if you must. We have time
+for one more attempt."</em>`;
