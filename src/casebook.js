@@ -7,8 +7,8 @@
  * lets students opt out of the filter at any time.
  */
 
-import { Casebook as State } from './core/state.js?v=8';
-import { html, raw, escape } from './core/components.js?v=8';
+import { Casebook as State } from './core/state.js?v=9';
+import { html, raw, escape } from './core/components.js?v=9';
 
 let _panel = null;
 let _showAll = false;   // student-controlled toggle to override the step filter

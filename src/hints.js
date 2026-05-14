@@ -3,7 +3,7 @@
  * inductive reasoning, and deductive reasoning. Available from every act.
  */
 
-import { html, raw, escape } from './core/components.js?v=8';
+import { html, raw, escape } from './core/components.js?v=9';
 
 const HINTS = {
   standard: {

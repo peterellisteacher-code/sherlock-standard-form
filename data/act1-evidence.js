@@ -16,8 +16,8 @@ export const EVIDENCE = [
     theme: 'Time & whereabouts',
     sprite: '/assets/pixel/item-watch.png',
     x: 0.78, y: 0.74,
-    examine: `Half-hunter, gold. Dial stopped at <span class="case-clue">11:14</span>. Glass cracked diagonally. The chain carries <span class="case-clue">pale clay mud</span> — suburban soil, not London. Inside the case, three letters: <span class="case-clue">J · T · W</span>.`,
-    relevant: `Stopped at <span class="case-clue">11:14</span>. Body found at 11:30 — a sixteen-minute gap. Mud on the chain puts the watch outside London earlier, against the Captain's claim he was at the Club all evening.`,
+    examine: `Half-hunter, gold. Dial <span class="case-clue">stopped at 11:14</span>. Glass cracked diagonally. The chain carries <span class="case-clue">pale clay mud</span> — <span class="case-clue">suburban soil, not London</span>. Inside the case, three letters: <span class="case-clue">J · T · W</span>.`,
+    relevant: `Watch stopped at <span class="case-clue">11:14</span>. Body found at <span class="case-clue">11:30</span> — a <span class="case-clue">sixteen-minute gap</span>. <span class="case-clue">Clay mud</span> on the chain puts the watch outside London earlier, against the Captain's claim he was <span class="case-clue">at the Club all evening</span>.`,
     discardWhy: 'A scratched watch on its own proves little.'
   },
   {
@@ -26,8 +26,8 @@ export const EVIDENCE = [
     theme: 'Identity of visitor',
     sprite: '/assets/pixel/item-telegram.png',
     x: 0.88, y: 0.66,
-    examine: `Yellow post-office paper, seal already broken. Eight words: <em><span class="case-clue">"He arrives the eight-fifteen. Be ready."</span></em> James received it <span class="case-clue">an hour before the murder</span>. Mrs Whitcombe cannot account for it.`,
-    relevant: `<span class="case-clue">An hour before the killing</span>: "He arrives the eight-fifteen. Be ready." Phrasing is wrong for trade. Mrs Whitcombe cannot explain it.`,
+    examine: `Yellow post-office paper, seal already broken. Eight words: <em><span class="case-clue">"He arrives the eight-fifteen. Be ready."</span></em> James received it <span class="case-clue">an hour before the murder</span>. He <span class="case-clue">read it twice, took his coat, went out</span> — and has not spoken of it since.`,
+    relevant: `<span class="case-clue">An hour before the killing</span>: <span class="case-clue">"He arrives the eight-fifteen. Be ready."</span> <span class="case-clue">Phrasing is wrong for trade</span>. The Captain went out at once on reading it. Mrs Whitcombe cannot explain it.`,
     discardWhy: 'A telegram with no clear sender is hard to use.'
   },
   {
@@ -46,8 +46,8 @@ export const EVIDENCE = [
     theme: 'Motive (blackmail)',
     sprite: '/assets/pixel/item-letters.png',
     x: 0.16, y: 0.62,
-    examine: `Three letters from Pelham to the Captain over recent months. The third, sealed differently: <em>"James, <span class="case-clue">my patience is at its end</span>. If we cannot resolve our accounts in private, we shall do so <span class="case-clue">very publicly indeed</span>. I shall be at the Club Wednesday."</em>`,
-    relevant: `Three letters. The third threatens public exposure: <span class="case-clue">"resolve our accounts … very publicly."</span> Pelham held something over the Captain.`,
+    examine: `Three letters from <span class="case-clue">Pelham to the Captain</span> over recent months. <span class="case-clue">The third</span>, sealed differently: <em>"James, <span class="case-clue">my patience is at its end</span>. If we cannot resolve our accounts in private, we shall do so <span class="case-clue">very publicly indeed</span>. <span class="case-clue">I shall be at the Club Wednesday</span>."</em>`,
+    relevant: `Three letters. The third threatens public exposure: <span class="case-clue">"resolve our accounts … very publicly."</span> <span class="case-clue">Pelham held something over the Captain</span>. He had announced he would be <span class="case-clue">at the Club Wednesday</span> — the night of the murder.`,
     discardWhy: 'Old correspondence between business partners.'
   },
   {
@@ -57,7 +57,7 @@ export const EVIDENCE = [
     sprite: '/assets/pixel/item-medal.png',
     x: 0.42, y: 0.16,
     examine: `Indian Service Medal, bronze octagon. Faded crimson ribbon. The prison would not let him wear it; his sister has kept it for him. The reverse is inscribed: <em><span class="case-clue">"For Multan, 1893."</span></em>`,
-    relevant: `Inscribed <span class="case-clue">"For Multan, 1893."</span> Whatever happened there, Pelham knew. His sister says it was the lever Pelham had on him.`,
+    relevant: `Inscribed <span class="case-clue">"For Multan, 1893."</span> Whatever happened there, <span class="case-clue">Pelham knew</span>. His sister says it was <span class="case-clue">the lever Pelham had on him</span>.`,
     discardWhy: 'A medal is decoration, not evidence.'
   },
   {
@@ -66,8 +66,8 @@ export const EVIDENCE = [
     theme: 'State of mind',
     sprite: '/assets/pixel/item-casefile.png',
     x: 0.62, y: 0.78,
-    examine: `Mrs Whitcombe's portfolio: inquest report, public service record, and at the back a discharge note from the Aldershot regimental surgeon: <em>"Capt. J. T. Whitcombe, 23rd Foot. Returned from Punjab with prolonged fever. <span class="case-clue">Marked episodes of fugue and confessional disorientation.</span>"</em>`,
-    relevant: `Aldershot discharge: <span class="case-clue">"fugue and confessional disorientation."</span> His confession may not be a reliable record of fact.`,
+    examine: `Mrs Whitcombe's portfolio: inquest report, public service record, and at the back a discharge note from the <span class="case-clue">Aldershot regimental surgeon</span>: <em>"Capt. J. T. Whitcombe, 23rd Foot. Returned from Punjab with <span class="case-clue">prolonged fever</span>. <span class="case-clue">Marked episodes of fugue and confessional disorientation.</span>"</em>`,
+    relevant: `Aldershot discharge: <span class="case-clue">"fugue and confessional disorientation."</span> The Captain has <span class="case-clue">confessed to crimes he did not commit</span> during fugues before. <span class="case-clue">His confession may not be a reliable record of fact</span>.`,
     discardWhy: 'Service records are public — Mycroft will have his own.'
   }
 ];

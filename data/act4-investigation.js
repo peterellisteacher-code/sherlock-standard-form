@@ -28,7 +28,7 @@ export const HOTSPOTS = [
     theme: 'Locked-room proof',
     x: 22, y: 35,
     title: 'The Yale lock — front door',
-    summary: 'A modern Yale lock. The key is in the inside socket; the door bolted from within. Locked from inside when the steward forced it.',
+    summary: `A modern Yale lock. The <span class="case-clue">key is in the inside socket</span>; the <span class="case-clue">door bolted from within</span>. <span class="case-clue">Locked from inside</span> when the steward forced it.`,
     casebook: '<span class="case-clue">Front door locked from within</span> when the body was found. Key in the inside socket.'
   },
   {
@@ -37,7 +37,7 @@ export const HOTSPOTS = [
     theme: 'Locked-room proof',
     x: 75, y: 28,
     title: 'The single window',
-    summary: 'A tall sash window. Multiple coats of paint seal the frame to the sill. The window has not been opened in years and cannot now be opened without splitting the wood.',
+    summary: `A tall sash window. <span class="case-clue">Multiple coats of paint seal the frame to the sill</span>. The window has <span class="case-clue">not been opened in years</span> and cannot now be opened without splitting the wood.`,
     casebook: '<span class="case-clue">Window painted shut</span> and has been for years. Not a means of entry or exit.'
   },
   {
@@ -46,7 +46,7 @@ export const HOTSPOTS = [
     theme: 'A struggle in the room',
     x: 38, y: 55,
     title: 'A tipped brandy decanter',
-    summary: 'A heavy crystal decanter on its side, contents pooling beneath. One glass on the side-table half full; another knocked off, lying whole on the carpet.',
+    summary: `A heavy crystal decanter on its side, contents pooling beneath. <span class="case-clue">Two brandy glasses</span>: one on the side-table <span class="case-clue">half full</span>; another <span class="case-clue">knocked off, lying whole on the carpet</span>.`,
     casebook: `<span class="case-clue">Two brandy glasses</span> — one half-full, one knocked over. The Captain was not Pelham's only company.`
   },
   {
@@ -55,7 +55,7 @@ export const HOTSPOTS = [
     theme: 'Where the Captain was',
     x: 50, y: 70,
     title: 'A service revolver',
-    summary: `Webley Mk II, .455. Discharged once. Serial matches the Captain's issue. Grip carries his initials. Mud on the heel — the same <strong>pale clay</strong> as the pocket-watch chain.`,
+    summary: `Webley Mk II, .455. <span class="case-clue">Discharged once</span>. Serial matches the Captain's issue. <span class="case-clue">Grip carries his initials</span>. Mud on the heel — the <span class="case-clue">same pale clay</span> as the pocket-watch chain.`,
     casebook: `Revolver IS the Captain's. Fired once. <span class="case-clue">Same suburban clay-mud</span> on the grip as the pocket-watch chain.`
   },
   {
@@ -64,7 +64,7 @@ export const HOTSPOTS = [
     theme: 'Where the shot came from',
     x: 45, y: 58,
     title: 'The chalk outline',
-    summary: 'The body lay face-up beside the leather chair, three feet from the revolver. Single shot, mid-chest, fired from about six feet. The angle suggests the shot came from the direction of the <strong>back-stair door</strong>, not the fireplace.',
+    summary: `The body lay face-up beside the leather chair, <span class="case-clue">three feet from the revolver</span>. Single shot, mid-chest, fired from <span class="case-clue">about six feet</span>. The <span class="case-clue">angle suggests the shot came from the back-stair door</span>, not the fireplace where the Captain was found.`,
     casebook: `Body, revolver, and Captain's reported position do not line up. <span class="case-clue">Shot came from the back-stair direction</span>, not where the Captain was standing.`
   },
   {
@@ -73,7 +73,7 @@ export const HOTSPOTS = [
     theme: 'Who else was here',
     x: 12, y: 78,
     title: 'The back-stair door',
-    summary: 'A narrower service door at the rear. Its bolt is <strong>heavily oiled — recent, professional</strong> — though the rest of the brass in the room is the dull green of un-cleaned fittings. The door opens silently.',
+    summary: `A narrower service door at the rear. Its bolt is <span class="case-clue">heavily oiled — recent, professional</span> — though the rest of the brass in the room is the dull green of un-cleaned fittings. The door <span class="case-clue">opens silently</span>.`,
     casebook: '<span class="case-clue">Back-stair door newly and professionally oiled</span> — recent, deliberate. Someone wanted it to open silently. The Captain has no reason to oil it.'
   },
   {
@@ -82,7 +82,7 @@ export const HOTSPOTS = [
     theme: 'Who else was here',
     x: 65, y: 80,
     title: 'A small brass object',
-    summary: `Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a <strong>Sikh khanda</strong>. Punjabi work — the kind carried by attendants of Sikh temples. Not the Captain's.`,
+    summary: `Half-hidden under the writing-desk: a small brass token, octagonal, stamped with a <span class="case-clue">Sikh khanda</span>. <span class="case-clue">Punjabi work</span> — the kind carried by attendants of Sikh temples. <span class="case-clue">Not the Captain's</span>.`,
     casebook: `A <span class="case-clue">Sikh brass token (khanda)</span> under the desk. Punjabi work, NOT the Captain's. Someone of South Asian origin has been in this room.`
   },
   {
@@ -91,7 +91,7 @@ export const HOTSPOTS = [
     theme: 'Who else was here',
     x: 30, y: 80,
     title: 'Footprint traces by the back-stair',
-    summary: `Partial footprint in <strong>pale clay-mud</strong> on the rug nearest the back-stair. Same colour and grain as the Captain's pocket-watch chain. The print is small — roughly <strong>size 7</strong>, narrower than a British military boot. The Captain wears size 9.`,
+    summary: `Partial footprint in <span class="case-clue">pale clay-mud</span> on the rug nearest the back-stair. <span class="case-clue">Same colour and grain</span> as the Captain's pocket-watch chain. The print is <span class="case-clue">size 7, narrower than a British military boot</span>. The Captain wears <span class="case-clue">size 9</span>.`,
     casebook: '<span class="case-clue">Size 7 narrow boot-print in clay mud</span> near the back-stair door. The Captain wears size 9. Someone with smaller feet came in by the back-stair.'
   }
 ];
@@ -100,14 +100,14 @@ export const SUSPECTS = [
   {
     id: 'captain',
     name: 'Captain James Whitcombe',
-    blurb: 'The confessed murderer. Found beside the body. Service revolver. Long history of fugue states.',
-    note: 'A valid argument can be made for him. But valid is not sound: which premises hold up against ALL the evidence?'
+    blurb: `The confessed murderer. <span class="case-clue">Found beside the body</span>. <span class="case-clue">Service revolver</span> in the room. Long history of <span class="case-clue">fugue states</span>.`,
+    note: `A valid argument can be made for him. But <span class="case-clue">valid is not sound</span>: which premises hold up against ALL the evidence?`
   },
   {
     id: 'hari',
     name: 'Hari Singh',
-    blurb: `Brother of Naunihal Singh, the man the Captain killed in Multan. Per Mycroft, arrived from Liverpool on the 8.15. Mentioned in the Captain's telegram.`,
-    note: `Has motive (revenge for Multan), means (the Captain's revolver), opportunity (the back-stair).`
+    blurb: `Brother of <span class="case-clue">Naunihal Singh</span>, the man the Captain killed in <span class="case-clue">Multan</span>. Per Mycroft, arrived from <span class="case-clue">Liverpool on the 8.15</span>.`,
+    note: `Look for motive, means, opportunity. Each must be a separate premise.`
   },
   {
     id: 'steward',

@@ -3,8 +3,8 @@
  * Detective name capture, narrative framing, four-act picker.
  */
 
-import { Casebook } from './core/state.js?v=8';
-import { html, raw, escape, modal } from './core/components.js?v=8';
+import { Casebook } from './core/state.js?v=9';
+import { html, raw, escape, modal } from './core/components.js?v=9';
 
 const ACTS = [
   {

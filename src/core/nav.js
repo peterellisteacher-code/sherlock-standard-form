@@ -11,7 +11,7 @@
  *   #/finale             -> Final reveal (after all four acts complete)
  */
 
-import { Casebook } from './state.js?v=8';
+import { Casebook } from './state.js?v=9';
 
 const _routes = new Map();
 let _currentScene = null;

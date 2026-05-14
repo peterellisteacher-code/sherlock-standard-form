@@ -10,10 +10,10 @@
  *   3. outro — closing narrative; the marked evidence is in the Casebook for Acts II/III/IV
  */
 
-import { Casebook } from '../core/state.js?v=8';
-import { html, raw, escape, toast } from '../core/components.js?v=8';
-import { announce, navigate } from '../core/nav.js?v=8';
-import { EVIDENCE, CASE_THREADS } from '../../data/act1-evidence.js?v=8';
+import { Casebook } from '../core/state.js?v=9';
+import { html, raw, escape, toast } from '../core/components.js?v=9';
+import { announce, navigate } from '../core/nav.js?v=9';
+import { EVIDENCE, CASE_THREADS } from '../../data/act1-evidence.js?v=9';
 
 /* ===== Mrs Whitcombe dialogue ===== */
 

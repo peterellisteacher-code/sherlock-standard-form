@@ -4,14 +4,14 @@
  * student writes a deductive argument; Holmes-AI evaluates validity + soundness.
  */
 
-import { Casebook } from '../core/state.js?v=8';
-import { judge } from '../core/ai-client.js?v=8';
-import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=8';
-import { announce, navigate } from '../core/nav.js?v=8';
+import { Casebook } from '../core/state.js?v=9';
+import { judge } from '../core/ai-client.js?v=9';
+import { html, raw, escape, speech, topbar, toast, modal } from '../core/components.js?v=9';
+import { announce, navigate } from '../core/nav.js?v=9';
 import {
   ACT4_INTRO, HOTSPOTS, SUSPECTS,
   ACT4_WRITE_PROMPT, ACT4_BACK_TO_HOTSPOTS_REMINDER, ACT4_FAIL_HINT
-} from '../../data/act4-investigation.js?v=8';
+} from '../../data/act4-investigation.js?v=9';
 
 let _state = null;
 
@@ -225,8 +225,8 @@ function drawAccuse(root) {
         ${SUSPECTS.map(s => html`
           <button class="suspect-card" data-suspect="${s.id}" data-selected="${_state.accusedSuspect === s.id ? 'true' : 'false'}">
             <div class="name">${escape(s.name)}</div>
-            <div class="blurb">${escape(s.blurb)}</div>
-            <p style="margin-top: var(--s-2); font-style: italic; font-size: 14px; color: var(--brass-soft);">${escape(s.note)}</p>
+            <div class="blurb">${raw(s.blurb)}</div>
+            <p style="margin-top: var(--s-2); font-style: italic; font-size: 14px; color: var(--brass-soft);">${raw(s.note)}</p>
           </button>
         `)}
       </div>
@@ -324,10 +324,10 @@ P4: ...
           <div class="shelf">
             <h4>From earlier acts</h4>
             <ul>
-              <li>Telegram: <em>"He arrives the eight-fifteen. Be ready."</em> — Foreign Office code for an arriving informer.</li>
-              <li>Mycroft: the Captain killed Naunihal Singh in Multan, 1893. Pelham was using this for blackmail.</li>
-              <li>Mycroft: there is a Hari Singh, brother of Naunihal, who took the train from Liverpool that arrives Paddington at 8.15.</li>
-              <li>The Captain\u0027s mental state: documented fugues since the Punjab fever.</li>
+              <li>Telegram: <em>"He arrives the <span class="case-clue">eight-fifteen</span>. Be ready."</em> — Foreign Office code for an <span class="case-clue">arriving informer</span>.</li>
+              <li>Mycroft: the Captain killed <span class="case-clue">Naunihal Singh in Multan, 1893</span>. Pelham was using this for <span class="case-clue">blackmail</span>.</li>
+              <li>Mycroft: there is a <span class="case-clue">Hari Singh, brother of Naunihal</span>, who took the train from <span class="case-clue">Liverpool that arrives Paddington at 8.15</span>.</li>
+              <li>The Captain\u0027s mental state: documented <span class="case-clue">fugues</span> since the Punjab fever.</li>
             </ul>
           </div>
         </aside>

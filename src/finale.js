@@ -3,9 +3,9 @@
  * Replays the case, summarises the philosophical work, prints a casebook digest.
  */
 
-import { Casebook } from './core/state.js?v=8';
-import { html, raw, escape, topbar } from './core/components.js?v=8';
-import { announce } from './core/nav.js?v=8';
+import { Casebook } from './core/state.js?v=9';
+import { html, raw, escape, topbar } from './core/components.js?v=9';
+import { announce } from './core/nav.js?v=9';
 
 export function render(root, _params) {
   Casebook.clearStepRelevance();
