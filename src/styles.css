@@ -904,32 +904,44 @@ body.modal-open { overflow: hidden; }
 }
 .hotspot {
   position: absolute;
-  background: rgba(184, 153, 104, 0.15);
+  background: rgba(184, 153, 104, 0.18);
   border: 2px solid var(--brass);
   border-radius: 50%;
   cursor: pointer;
   width: 56px; height: 56px;
+  /* translate -50%/-50% centres the circle on the (left, top) coordinate.
+   * IMPORTANT: do NOT compose a `scale(...)` into this transform on hover —
+   * the percentage-based translate is computed in the element's local box,
+   * and adding scale shifts the apparent centre by ~4px. Use background +
+   * box-shadow + border for hover feedback instead (no transform change). */
   transform: translate(-50%, -50%);
   display: grid; place-items: center;
   font-family: var(--font-evidence);
   font-size: var(--type-md);
   color: var(--brass-soft);
-  transition: transform var(--transition-fast);
-  animation: pulse 2.4s ease-in-out infinite;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  animation: hotspot-pulse 2.4s ease-in-out infinite;
 }
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 153, 104, 0.6); }
-  50% { box-shadow: 0 0 0 12px rgba(184, 153, 104, 0); }
+@keyframes hotspot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 153, 104, 0.55); }
+  50%      { box-shadow: 0 0 0 10px rgba(184, 153, 104, 0); }
 }
 .hotspot:hover, .hotspot:focus-visible {
-  transform: translate(-50%, -50%) scale(1.15);
-  background: rgba(184, 153, 104, 0.35);
+  background: rgba(184, 153, 104, 0.5);
+  border-color: var(--brass-soft);
+  /* Static outer ring on hover/focus — replaces the scale-up so the centre
+   * stays anchored. Stronger than the pulse, but does NOT affect layout. */
+  box-shadow: 0 0 0 6px rgba(184, 153, 104, 0.4), 0 0 16px 4px rgba(184, 153, 104, 0.25);
+  animation: none;          /* pause the pulse while hovered for stability */
 }
 .hotspot[data-found="true"] {
   border-color: var(--evidence-soft);
   background: rgba(95, 124, 63, 0.4);
   animation: none;
   cursor: default;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hotspot { animation: none; }
 }
 .hotspot[data-found="true"]::after {
   content: "✓";
